@@ -19,6 +19,9 @@ import re
 from pathlib import Path
 
 import trafilatura
+import yaml
+
+from crawler.crawl import SEEDS, in_scope
 
 ROOT = Path(__file__).resolve().parent.parent
 RAW = ROOT / "data" / "raw"
@@ -256,7 +259,12 @@ def make_doc(site: str, kind: str, url: str, title: str, text: str, snapshot: st
 
 
 def iter_sources():
-    """Yield (site, url, html, snapshot_date) for crawled and hand-saved pages."""
+    """Yield (site, url, html, snapshot_date) for crawled and hand-saved pages.
+
+    Both the requested URL and the final URL (after redirects) must be on the site's
+    allowlisted hosts; anything else is dropped.
+    """
+    hosts = {k: v["hosts"] for k, v in yaml.safe_load(SEEDS.read_text())["sites"].items()}
     manifest = RAW / "manifest.jsonl"
     if manifest.exists():
         latest = {}
@@ -264,14 +272,21 @@ def iter_sources():
             r = json.loads(line)
             latest[r["url"]] = r
         for r in latest.values():
-            if r["outcome"] == "ok":
-                html = (ROOT / r["path"]).read_text(encoding="utf-8")
-                yield r["site"], r["url"], html, r["fetched_at"][:10]
+            if r["outcome"] != "ok":
+                continue
+            if not in_scope(r.get("final_url") or r["url"], hosts[r["site"]]):
+                print(f"[extract] off-scope redirect, skipped: {r['url']} -> {r['final_url']}")
+                continue
+            html = (ROOT / r["path"]).read_text(encoding="utf-8")
+            yield r["site"], r["url"], html, r["fetched_at"][:10]
     for f in sorted(MANUAL.glob("*/*.html")):
         html = f.read_text(encoding="utf-8", errors="ignore")
         m = SAVED_FROM.search(html[:2000]) or CANONICAL.search(html)
         if not m:
             print(f"[manual] {f}: no source URL (saved-from comment or canonical link); skipped")
+            continue
+        if f.parent.name not in hosts or not in_scope(m.group(1), hosts[f.parent.name]):
+            print(f"[manual] {f}: URL {m.group(1)} not on {f.parent.name} hosts; skipped")
             continue
         snapshot = re.search(r"\d{4}-\d{2}-\d{2}", f.stem)
         yield f.parent.name, m.group(1), html, snapshot.group(0) if snapshot else "unknown"

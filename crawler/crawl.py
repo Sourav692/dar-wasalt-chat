@@ -51,15 +51,23 @@ def is_challenge(status: int | None, title: str, body_text: str) -> bool:
     return any(m in head for m in CHALLENGE_MARKERS)
 
 
-def apply_scope(urls: list[str], exclude: list[str], caps: dict[str, int]) -> list[str]:
-    """Dedupe (order kept), drop excluded path fragments, keep the first N under capped prefixes."""
+def in_scope(url: str, hosts: list[str]) -> bool:
+    """https on an allowlisted host only. Blocks off-site sitemap entries and redirects."""
+    parts = urlsplit(url)
+    return parts.scheme == "https" and parts.hostname in hosts and parts.port in (None, 443)
+
+
+def apply_scope(
+    urls: list[str], hosts: list[str], exclude: list[str], caps: dict[str, int]
+) -> list[str]:
+    """Keep allowlisted hosts, dedupe (order kept), drop excluded paths, cap prefixes."""
     seen: set[str] = set()
     used: Counter[str] = Counter()
     out = []
     for url in urls:
         url = url.rstrip("/") or url
         path = urlsplit(url).path
-        if url in seen or any(x in path for x in exclude):
+        if url in seen or not in_scope(url, hosts) or any(x in path for x in exclude):
             continue
         prefix = next((p for p in caps if path.startswith(p)), None)
         if prefix:
@@ -128,8 +136,12 @@ async def fetch_text(
 
 async def crawl_site(ctx: BrowserContext, gate: HostGate, site: str, cfg: dict, wait_ms: int):
     page = await ctx.new_page()
+    hosts = cfg["hosts"]
     urls = list(cfg.get("urls", []))
     for sm in cfg.get("sitemaps", []):
+        if not in_scope(sm, hosts):
+            print(f"[{site}] sitemap off-scope, skipped: {sm}")
+            continue
         if not await gate.allowed(ctx, page, sm):
             print(f"[{site}] sitemap disallowed by robots: {sm}")
             continue
@@ -137,7 +149,7 @@ async def crawl_site(ctx: BrowserContext, gate: HostGate, site: str, cfg: dict, 
         found = re.findall(r"<loc>\s*(.*?)\s*</loc>", text)
         print(f"[{site}] sitemap {sm}: status={status}, {len(found)} urls")
         urls += found
-    urls = apply_scope(urls, cfg.get("exclude", []), cfg.get("caps", {}))
+    urls = apply_scope(urls, hosts, cfg.get("exclude", []), cfg.get("caps", {}))
     print(f"[{site}] {len(urls)} urls in scope")
 
     done = load_done()
@@ -153,17 +165,21 @@ async def crawl_site(ctx: BrowserContext, gate: HostGate, site: str, cfg: dict, 
         if not await gate.allowed(ctx, page, url):
             rec["outcome"] = "skipped_robots"
         else:
-            rec.update(await fetch_page(page, gate, site, url, wait_ms))
+            rec.update(await fetch_page(page, gate, site, url, wait_ms, hosts))
         append_manifest(rec)
         print(f"[{site}] {i}/{len(urls)} {rec['outcome']:<16} {url}")
     await page.close()
 
 
-async def fetch_page(page: Page, gate: HostGate, site: str, url: str, wait_ms: int) -> dict:
+async def fetch_page(
+    page: Page, gate: HostGate, site: str, url: str, wait_ms: int, hosts: list[str]
+) -> dict:
     for attempt in range(3):  # retries cover network errors only, never challenges
         await gate.wait(urlsplit(url).netloc)
         try:
             resp = await page.goto(url, wait_until="domcontentloaded", timeout=45000)
+            if not in_scope(page.url, hosts):  # redirected off-site: discard
+                return {"outcome": "skipped_offscope", "final_url": page.url}
             await page.wait_for_timeout(wait_ms)
             await page.evaluate("window.scrollTo(0, document.body.scrollHeight)")
             await page.wait_for_timeout(1000)

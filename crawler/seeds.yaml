@@ -4,6 +4,7 @@ render_wait_ms: 3000      # time for client-side rendering after DOMContentLoade
 
 sites:
   darglobal:
+    hosts: [darglobal.co.uk]                  # https only; anything else is dropped
     sitemaps:
       - https://darglobal.co.uk/sitemap.xml   # robots.txt disallows only /sitemap_index.xml
     urls: []
@@ -21,6 +22,7 @@ sites:
       /blog/: 50
 
   wasalt:
+    hosts: [wasalt.sa, cdn.wasalt.sa]
     sitemaps:
       - https://cdn.wasalt.sa/sitemap/static_sitemap_en_sa.xml.gz
     urls:

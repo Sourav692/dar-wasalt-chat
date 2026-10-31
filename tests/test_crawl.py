@@ -1,6 +1,6 @@
 from protego import Protego
 
-from crawler.crawl import ROBOT_NAME, apply_scope, is_challenge
+from crawler.crawl import ROBOT_NAME, apply_scope, in_scope, is_challenge
 
 # Excerpt of darglobal.co.uk/robots.txt (2026-10-31): wildcard rules stdlib robotparser ignores.
 DAR_ROBOTS = """
@@ -50,5 +50,21 @@ def test_scope_dedupes_excludes_and_caps():
         "https://x.com/blog/b",
         "https://x.com/blog/c",
     ]
-    out = apply_scope(urls, exclude=["/pay-online"], caps={"/blog/": 2})
+    out = apply_scope(urls, hosts=["x.com"], exclude=["/pay-online"], caps={"/blog/": 2})
     assert out == ["https://x.com/about", "https://x.com/blog/a", "https://x.com/blog/b"]
+
+
+def test_scope_blocks_offsite_and_non_https():
+    hosts = ["darglobal.co.uk"]
+    assert in_scope("https://darglobal.co.uk/about", hosts)
+    for bad in (
+        "http://darglobal.co.uk/about",
+        "https://evil.example/darglobal.co.uk",
+        "https://darglobal.co.uk.evil.example/",
+        "https://darglobal.co.uk:8443/",
+        "https://169.254.169.254/latest/meta-data",
+        "https://localhost/",
+        "file:///etc/passwd",
+    ):
+        assert not in_scope(bad, hosts), bad
+    assert apply_scope(["https://evil.example/x"], hosts, [], {}) == []
