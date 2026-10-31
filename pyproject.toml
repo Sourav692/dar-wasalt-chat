@@ -19,6 +19,8 @@ dependencies = [
 # Offline crawl + extraction. Not installed in the runtime image.
 crawl = [
     "playwright>=1.64.1",
+    "protego>=0.7.0",
+    "pyyaml>=6.0.3",
     "trafilatura>=2.3.1",
 ]
 dev = [

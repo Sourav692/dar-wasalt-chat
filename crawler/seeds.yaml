@@ -1,0 +1,41 @@
+# Crawl scope. Every URL is still checked against the host's robots.txt before fetching.
+delay_seconds: 5          # gap between requests to the same host
+render_wait_ms: 3000      # time for client-side rendering after DOMContentLoaded
+
+sites:
+  darglobal:
+    sitemaps:
+      - https://darglobal.co.uk/sitemap.xml   # robots.txt disallows only /sitemap_index.xml
+    urls: []
+    exclude:                                  # forms, payment, thank-you and campaign pages
+      - /pay-online
+      - /thank-you
+      - /success
+      - /bookYourUnit
+      - /landing
+      - /internship-application
+      - /new-home-page
+      - /campaigns
+      - /win-a-trip
+    caps:                                     # keep the first N sitemap entries under a prefix
+      /blog/: 50
+
+  wasalt:
+    sitemaps:
+      - https://cdn.wasalt.sa/sitemap/static_sitemap_en_sa.xml.gz
+    urls:
+      - https://wasalt.sa/en/corporate
+      # Category pages embed listing cards in __NEXT_DATA__, so listings are sampled
+      # from here and individual listing pages (Cloudflare-challenged) are never fetched.
+      - https://wasalt.sa/en/apartments-for-sale-in-riyadh
+      - https://wasalt.sa/en/villas-for-sale-in-riyadh
+      - https://wasalt.sa/en/apartments-for-rent-in-riyadh
+      - https://wasalt.sa/en/lands-for-sale-in-riyadh
+      - https://wasalt.sa/en/apartments-for-sale-in-jeddah
+      - https://wasalt.sa/en/villas-for-rent-in-jeddah
+      - https://wasalt.sa/en/properties-for-sale-in-dammam
+      - https://wasalt.sa/en/apartments-for-sale-in-makkah
+      - https://wasalt.sa/en/properties-for-rent-in-madinah
+      - https://wasalt.sa/en/villas-for-sale-in-al-khobar
+    exclude: []
+    caps: {}
