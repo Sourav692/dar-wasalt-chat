@@ -1,0 +1,44 @@
+[project]
+name = "dar-wasalt-chat"
+version = "0.1.0"
+description = "Grounded chatbot over public Dar Global and Wasalt content"
+authors = [{ name = "Sourav Banerjee", email = "sourav692@gmail.com" }]
+requires-python = ">=3.12,<3.13"
+# Runtime deps only: this is what ships in the Docker image.
+dependencies = [
+    "fastapi>=0.162.0",
+    "fastembed>=0.9.1",
+    "httpx>=0.28.1",
+    "numpy>=2.5.4",
+    "pydantic-settings>=2.16.2",
+    "rank-bm25>=0.2.2",
+    "uvicorn[standard]>=0.54.0",
+]
+
+[dependency-groups]
+# Offline crawl + extraction. Not installed in the runtime image.
+crawl = [
+    "playwright>=1.64.1",
+    "trafilatura>=2.3.1",
+]
+dev = [
+    "pytest>=9.2.0",
+    "pyyaml>=6.0.3",
+    "ruff>=0.17.3",
+]
+
+[tool.uv]
+package = false
+default-groups = ["dev", "crawl"]
+
+[tool.ruff]
+line-length = 100
+target-version = "py312"
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "B", "UP", "S"]
+ignore = ["S101"]  # assert is fine in tests
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+pythonpath = ["."]

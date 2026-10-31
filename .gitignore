@@ -1,0 +1,12 @@
+.plan/
+.env
+.remember/
+data/
+index/
+.venv/
+__pycache__/
+.pytest_cache/
+.ruff_cache/
+*.pyc
+.DS_Store
+FDE_Technical_Assignment.docx
