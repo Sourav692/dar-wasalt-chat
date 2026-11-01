@@ -1,10 +1,11 @@
 """Abuse and browser-safety controls: rate limits, body cap, input checks, security headers."""
 
 import hashlib
+import ipaddress
 import re
 import secrets
 import time
-from collections import deque
+from collections import OrderedDict, deque
 
 from fastapi import Request
 from fastapi.responses import JSONResponse
@@ -50,6 +51,23 @@ def client_ip(request: Request, trusted_hops: int) -> str:
     return request.client.host if request.client else "unknown"
 
 
+def client_key(ip: str) -> str:
+    """Rate-limit key: an IPv4 address as is, an IPv6 address by its /64 network.
+
+    One IPv6 subscriber usually holds a whole /64, so keying by full address would let a
+    client rotate addresses to dodge the limit.
+    """
+    try:
+        addr = ipaddress.ip_address(ip)
+    except ValueError:
+        return ip
+    if addr.version == 4:
+        return str(addr)
+    if addr.ipv4_mapped:
+        return str(addr.ipv4_mapped)
+    return str(ipaddress.ip_network(f"{addr}/64", strict=False))
+
+
 class IPHasher:
     """Salted hash so logs can group requests by client without storing the address."""
 
@@ -64,6 +82,9 @@ class IPHasher:
 class RateLimiter:
     """Sliding windows per client key: `per_minute` and `per_day`.
 
+    Memory is capped at MAX_KEYS clients; past that the least recently seen client is
+    forgotten. Not thread-safe: call it from the event loop only (an async dependency).
+
     ponytail: in-memory and per instance, so with Cloud Run max 2 instances a client can get
     up to 2x the limit. Move to Redis/Memorystore if that matters.
     """
@@ -72,13 +93,19 @@ class RateLimiter:
 
     def __init__(self, per_minute: int, per_day: int, clock=time.monotonic):
         self.limits = ((60.0, per_minute), (86_400.0, per_day))
-        self.hits: dict[str, deque[float]] = {}
+        self.hits: OrderedDict[str, deque[float]] = OrderedDict()
         self.clock = clock
 
     def check(self, key: str) -> float | None:
         """Record a hit and return None, or return seconds to wait if a limit is reached."""
         now = self.clock()
-        hits = self.hits.setdefault(key, deque())
+        hits = self.hits.get(key)
+        if hits is None:
+            hits = self.hits[key] = deque()
+            if len(self.hits) > self.MAX_KEYS:
+                self.hits.popitem(last=False)  # evict the least recently seen client
+        else:
+            self.hits.move_to_end(key)
         while hits and now - hits[0] >= self.limits[-1][0]:
             hits.popleft()
         for window, limit in self.limits:
@@ -86,14 +113,7 @@ class RateLimiter:
             if len(recent) >= limit:
                 return round(window - (now - recent[0]), 1)
         hits.append(now)
-        if len(self.hits) > self.MAX_KEYS:
-            self.prune(now)
         return None
-
-    def prune(self, now: float) -> None:
-        day = self.limits[-1][0]
-        for key in [k for k, v in self.hits.items() if not v or now - v[-1] >= day]:
-            del self.hits[key]
 
 
 class BodyTooLarge(Exception):

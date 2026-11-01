@@ -2,7 +2,7 @@ import pytest
 from starlette.requests import Request
 
 from app.config import get_settings
-from app.security import RateLimiter, client_ip
+from app.security import RateLimiter, client_ip, client_key
 
 
 def request_with(xff=None, host="10.0.0.9"):
@@ -31,15 +31,33 @@ def test_rate_limiter_minute_and_day_windows():
     assert limiter.check("a") is None
 
 
-def test_rate_limiter_prunes_idle_clients():
-    now = [0.0]
-    limiter = RateLimiter(per_minute=10, per_day=10, clock=lambda: now[0])
+def test_rate_limiter_memory_is_capped_by_lru_eviction():
+    limiter = RateLimiter(per_minute=10, per_day=10)
     limiter.MAX_KEYS = 2
     limiter.check("a")
-    now[0] = 90_000
     limiter.check("b")
+    limiter.check("a")  # a is now the most recent
     limiter.check("c")
-    assert "a" not in limiter.hits
+    assert list(limiter.hits) == ["a", "c"]
+
+
+def test_ipv6_clients_keyed_by_64_network():
+    assert client_key("2001:db8:1:2:aaaa::1") == client_key("2001:db8:1:2:bbbb::9")
+    assert client_key("2001:db8:1:2::1") != client_key("2001:db8:1:3::1")
+    assert client_key("203.0.113.7") == "203.0.113.7"
+    assert client_key("::ffff:203.0.113.7") == "203.0.113.7"
+    assert client_key("not-an-ip") == "not-an-ip"
+
+
+def test_global_limit_applies_across_clients(client, monkeypatch):
+    import app.main as main
+    from tests.test_api import fake_llm
+
+    monkeypatch.setattr(main, "stream_chat", fake_llm("ok"))
+    main.app.state.global_limiter = RateLimiter(per_minute=1, per_day=100)
+    assert ask(client, "hi", headers={"X-Forwarded-For": "198.51.100.1"}).status_code == 200
+    r = ask(client, "hi", headers={"X-Forwarded-For": "198.51.100.2"})
+    assert r.status_code == 429 and "busy" in r.json()["detail"]
 
 
 def ask(client, content, **kw):

@@ -26,6 +26,7 @@ from app.security import (
     RateLimiter,
     SecurityHeaders,
     client_ip,
+    client_key,
 )
 
 logging.basicConfig(level=logging.INFO, format="%(message)s")
@@ -44,6 +45,7 @@ async def lifespan(app: FastAPI):
     salt = settings.log_salt.get_secret_value() if settings.log_salt else None
     app.state.hash_ip = IPHasher(salt)
     app.state.limiter = RateLimiter(settings.rate_per_minute, settings.rate_per_day)
+    app.state.global_limiter = RateLimiter(settings.global_per_minute, settings.global_per_day)
     app.state.http = httpx.AsyncClient(timeout=httpx.Timeout(settings.llm_timeout_s, connect=10))
     yield
     await app.state.http.aclose()
@@ -85,16 +87,19 @@ class ChatRequest(BaseModel):
         return self
 
 
-def rate_limit(request: Request) -> None:
-    ip_hash = app.state.hash_ip(client_ip(request, get_settings().trusted_proxy_hops))
-    request.state.ip_hash = ip_hash
-    if (wait := app.state.limiter.check(ip_hash)) is not None:
-        log.info(json.dumps({"event": "rate_limited", "ip_hash": ip_hash}))
-        raise HTTPException(
-            status_code=429,
-            detail="Too many messages. Please wait a moment and try again.",
-            headers={"Retry-After": str(math.ceil(wait))},
-        )
+async def rate_limit(request: Request) -> None:
+    # async on purpose: it runs on the event loop, so RateLimiter.check never races itself.
+    key = client_key(client_ip(request, get_settings().trusted_proxy_hops))
+    ip_hash = request.state.ip_hash = app.state.hash_ip(key)
+    for limiter, scope, message in (
+        (app.state.limiter, ip_hash, "Too many messages. Please wait a moment and try again."),
+        (app.state.global_limiter, "*", "The assistant is busy. Please try again later."),
+    ):
+        if (wait := limiter.check(scope)) is not None:
+            log.info(json.dumps({"event": "rate_limited", "scope": scope, "ip_hash": ip_hash}))
+            raise HTTPException(
+                status_code=429, detail=message, headers={"Retry-After": str(math.ceil(wait))}
+            )
 
 
 def require_passcode(x_access_code: str | None = Header(default=None)) -> None:

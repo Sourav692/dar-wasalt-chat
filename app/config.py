@@ -26,6 +26,9 @@ class Settings(BaseSettings):
     access_passcode: SecretStr | None = None
     rate_per_minute: int = 10
     rate_per_day: int = 100
+    # Whole service: OpenRouter allows 1,000 free-model requests a day on an account with credit.
+    global_per_minute: int = 60
+    global_per_day: int = 1000
     # Proxies that append to X-Forwarded-For: 1 for Cloud Run's front end.
     trusted_proxy_hops: int = 1
     log_salt: SecretStr | None = None
