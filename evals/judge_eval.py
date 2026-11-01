@@ -4,6 +4,7 @@ Runs the real pipeline per model, then asks a judge model to grade each answer a
 context the model was given. With several --models it is the model bake-off.
 
 Usage: uv run python -m evals.judge_eval [--models a,b] [--limit N] [--out results.json]
+Each --models entry is one run; join ids with "+" to test a fallback chain (a+b+c).
 Needs OPENROUTER_API_KEY and the built index. Not run in CI (live model calls).
 """
 
@@ -66,7 +67,9 @@ async def run_model(index, http, golden: list[dict], model: str) -> list[dict]:
 
     async def one(item):
         async with gate:
-            row = await generate(index, http, item["q"], model)
+            row = await generate(index, http, item["q"], model.replace("+", ","))
+            status = "ERR " + row["error"][:40] if row["error"] else f"ok {row['latency_s']}s"
+            print(f"[{model.split('/')[-1][:30]}] {item['q'][:50]!r} {status}", flush=True)
             return await grade(http, row, item) | {
                 "answerable": item.get("answerable", True),
                 "lang": item.get("lang", "en"),
@@ -110,12 +113,17 @@ async def main(models: list[str], limit: int | None, out: Path | None) -> None:
     index = load_index()
     report = {"judge": JUDGE_MODEL, "summaries": [], "rows": {}}
     async with httpx.AsyncClient(timeout=httpx.Timeout(60, connect=10)) as http:
-        for model in models:
+
+        async def bench(model):
             rows = await run_model(index, http, golden, model)
             summary = summarize(model, rows)
+            print(json.dumps(summary, ensure_ascii=False), flush=True)
+            return model, summary, rows
+
+        # Models run in parallel; each keeps its own CONCURRENCY limit.
+        for model, summary, rows in await asyncio.gather(*(bench(m) for m in models)):
             report["summaries"].append(summary)
             report["rows"][model] = [{k: v for k, v in r.items() if k != "context"} for r in rows]
-            print(json.dumps(summary, ensure_ascii=False), flush=True)
     if out:
         out.write_text(json.dumps(report, ensure_ascii=False, indent=2))
         print(f"-> {out}")

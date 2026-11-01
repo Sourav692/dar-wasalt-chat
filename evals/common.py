@@ -12,7 +12,9 @@ from app.llm import LLMError, stream_chat
 from app.prompt import build_messages
 from app.retrieval import Index, search
 
-JUDGE_MODEL = "nvidia/nemotron-3-ultra-550b-a55b:free"
+# A different vendor from every answer candidate, so no model grades itself. Picked on a
+# planted-claim probe: the only free model that flagged both the claim and its citation.
+JUDGE_MODEL = "dots-studio/dots-3-note-preview:free"
 
 
 async def generate(
@@ -57,7 +59,7 @@ async def complete(http: httpx.AsyncClient, model: str, prompt: str, tries: int 
         "model": model,
         "messages": [{"role": "user", "content": prompt}],
         "temperature": 0,
-        "max_tokens": 4000,
+        "max_tokens": 16000,  # the judge reasons first; 4000 cut 21 of 140 verdicts short
         "reasoning": {"effort": "low", "exclude": True},
     }
     for attempt in range(tries):

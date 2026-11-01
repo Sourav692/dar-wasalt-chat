@@ -12,7 +12,12 @@ class Settings(BaseSettings):
 
     openrouter_api_key: SecretStr
     # Comma-separated: primary first, then fallbacks (OpenRouter's `models` routing).
-    openrouter_models: str = "google/gemma-4-31b-it:free,nvidia/nemotron-3.5-lightning:free"
+    # Chosen in docs/MODEL_CHOICE.md.
+    openrouter_models: str = (
+        "nvidia/nemotron-3.5-super-vl:free,"
+        "nvidia/nemotron-3.5-lightning:free,"
+        "nvidia/nemotron-3-ultra-550b-a55b:free"
+    )
     openrouter_url: str = "https://openrouter.ai/api/v1/chat/completions"
     app_url: str = "https://github.com/Sourav692/dar-wasalt-chat"  # sent as HTTP-Referer
     app_title: str = "Dar Global & Wasalt Assistant"

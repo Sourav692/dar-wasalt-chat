@@ -49,7 +49,7 @@ Reading the numbers:
 
 - The judge marks citations wrong when an introductory sentence ("Here are villas for rent in Jeddah") has no `[n]`, even when every listing line is cited. Most of the 0.25 comes from that strictness.
 - Fact recall is a substring test, so a correct answer that rephrases a fact counts as a miss.
-- The timeouts are a real reliability problem with this free model under load. Choosing the model chain (`docs/MODEL_CHOICE.md`) has to fix them.
+- The timeouts are a real reliability problem with this free model under load. The Phase 8 bake-off (`docs/MODEL_CHOICE.md`) moved the primary to `nemotron-3.5-super-vl`, which answers in 3.5 s at p50; the chosen chain answered all 35 questions without an error, graded by a judge from another vendor.
 - The Japan trap question works: the corpus mentions Japan only as Aston Martin's earlier partnerships, and the model says the documents do not confirm Dar Global projects there. With reasoning disabled in an earlier test, the same model answered "Yes, Dar Global has projects in Japan. [2]", which is why reasoning stays on.
 
 Raw results: `evals/results/judge_nemotron-lightning_2026-11-01.json`.
