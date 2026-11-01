@@ -134,3 +134,15 @@ async def test_stream_failures_raise(response, status):
     with pytest.raises(LLMError) as exc:
         await collect(lambda request: response)
     assert exc.value.status == status
+
+
+def test_passcode_enforced_when_set(client, monkeypatch):
+    monkeypatch.setattr(main, "stream_chat", fake_llm("ok"))
+    monkeypatch.setenv("ACCESS_PASSCODE", "open-sesame")
+    get_settings.cache_clear()
+    body = {"messages": [{"role": "user", "content": "hello"}]}
+    assert client.post("/api/chat", json=body).status_code == 401
+    wrong = {"X-Access-Code": "open-sesamE"}
+    assert client.post("/api/chat", json=body, headers=wrong).status_code == 401
+    right = {"X-Access-Code": "open-sesame"}
+    assert client.post("/api/chat", json=body, headers=right).status_code == 200

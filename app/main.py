@@ -1,5 +1,6 @@
 """FastAPI app: /api/chat streams a grounded answer as server-sent events."""
 
+import hmac
 import json
 import logging
 import time
@@ -7,7 +8,7 @@ from contextlib import asynccontextmanager
 from typing import Literal
 
 import httpx
-from fastapi import FastAPI
+from fastapi import Depends, FastAPI, Header, HTTPException
 from fastapi.concurrency import run_in_threadpool
 from fastapi.responses import StreamingResponse
 from pydantic import BaseModel, Field, model_validator
@@ -56,6 +57,16 @@ class ChatRequest(BaseModel):
         return self
 
 
+def require_passcode(x_access_code: str | None = Header(default=None)) -> None:
+    """When ACCESS_PASSCODE is set, /api/chat needs a matching X-Access-Code header."""
+    expected = get_settings().access_passcode
+    if expected is None:
+        return
+    given = (x_access_code or "").encode()
+    if not hmac.compare_digest(given, expected.get_secret_value().encode()):
+        raise HTTPException(status_code=401, detail="Access code required.")
+
+
 def sse(event: str, data: dict) -> str:
     return f"event: {event}\ndata: {json.dumps(data, ensure_ascii=False)}\n\n"
 
@@ -71,7 +82,7 @@ def healthz() -> dict:
     }
 
 
-@app.post("/api/chat")
+@app.post("/api/chat", dependencies=[Depends(require_passcode)])
 async def chat(req: ChatRequest) -> StreamingResponse:
     settings, index = get_settings(), app.state.index
     question = req.messages[-1].content.strip()
