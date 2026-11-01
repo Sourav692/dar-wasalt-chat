@@ -1,4 +1,4 @@
-.PHONY: install test lint run
+.PHONY: install test lint run extract index
 
 install:
 	uv sync
@@ -13,3 +13,9 @@ lint:
 
 run:
 	uv run uvicorn app.main:app --reload --port 8000
+
+extract:
+	uv run python -m crawler.extract
+
+index:
+	uv run python -m ingest.build_index
