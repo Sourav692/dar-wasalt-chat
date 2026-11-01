@@ -1,0 +1,107 @@
+# Golden questions for the retrieval eval (evals/retrieval_eval.py) and, later, the LLM judge.
+#
+# A question is a hit when any of its top-5 chunks satisfies its expectation:
+#   urls:    the chunk URL contains any of these fragments (a trailing $ means "ends with")
+#   listing: the chunk is a listing whose meta matches every key/value given
+# answerable: false marks questions the corpus cannot answer; they are scored by the judge,
+# not by hit@5.
+
+# --- Dar Global -------------------------------------------------------------
+- q: Where is Tierra Viva located?
+  urls: [/tierra-viva, /partners/lamborghini, automotive-designed-vacation-homes-benahavis]
+  facts: [Benahavís, Spain, Automobili Lamborghini]
+- q: Which car brand designed the interiors of The Astera?
+  urls: [/the-astera, /partners/aston-martin, astera]
+  facts: [Aston Martin, Al Marjan Island, Ras Al Khaimah]
+- q: Where is the DG1 tower?
+  urls: [/dg1, dg1-project-in-business-bay]
+  facts: [Business Bay, Dubai Canal]
+- q: Tell me about the Da Vinci Tower by Pagani
+  urls: [/davinci-tower-by-pagani, da-vinci-tower-by-pagani, /partners/pagani]
+  facts: [Dubai, 2, 3 and 4-bedroom residences]
+- q: What is AIDA in Oman?
+  urls: [aida]
+  facts: [Muscat, Trump golf course]
+- q: Is Dar Global listed on a stock exchange?
+  urls: [london-stock-exchange, /investor, /about]
+  facts: [London Stock Exchange]
+- q: Who is the CEO of Dar Global?
+  urls: [/about, /investor, capital-partners-targets, trump-villas-simaisma, portfolio-gdv-reaches-23-billion]
+  facts: [Ziad El Chaar]
+- q: What projects does Dar Global have in Qatar?
+  urls: [/projects/properties-in-qatar, /les-vagues, simaisma, /rayana/trump-international-qatar]
+  facts: [Les Vagues, Qetaifan Island North, Trump villas Simaisma]
+- q: What is Les Vagues by Elie Saab?
+  urls: [/les-vagues, /partners/elie-saab, les-vagues]
+  facts: [Qetaifan Island North, Doha]
+- q: Tell me about Trump Tower Jeddah
+  urls: [trump-tower-jeddah, /partners/the-trump-organization]
+  facts: [Jeddah Corniche, SAR 2 billion]
+- q: What is the Rayana community?
+  urls: [rayana]
+  facts: [Wadi Safar, Riyadh]
+- q: Can I invest in Dar Global property with crypto or tokens?
+  urls: [/tokenization, /Invest-crypto, crypto-tokenized, tokenized-fractional]
+  facts: [tokenization]
+- q: How can I become a broker or agent with Dar Global?
+  urls: [/become-a-broker, /become-an-agent]
+- q: What are the benefits of buying property in Dubai?
+  urls: [/why-invest, /faq, /projects/properties-in-uae]
+  facts: [Golden Visa, 0% income tax]
+- q: What villas does Dar Global sell in Spain?
+  urls: [/projects/properties-in-spain, /tierra-viva, missoni-branded-residences-costa-del-sol]
+- q: What is Urban Oasis by Missoni?
+  urls: [/urban-oasis-by-missoni, urban-oasis]
+  facts: [Dubai Canal, Missoni]
+- q: How do I contact Dar Global?
+  urls: [/get-in-touch]
+
+# --- Wasalt -----------------------------------------------------------------
+- q: When was Wasalt launched?
+  urls: [wasalt.sa/en/corporate]
+  facts: [January 2022]
+- q: What is Wasalt Business?
+  urls: [wasalt.sa/en/corporate, wasalt.sa/en$]
+  facts: [CRM application for brokers]
+- q: Does Wasalt run property auctions?
+  urls: [wasalt.sa/en/corporate, wasalt.sa/en$]
+  facts: [Wasalt Auction, Infath]
+- q: What are Wasalt's terms of use?
+  urls: [/s/terms-of-use]
+- q: How does Wasalt handle my personal data?
+  urls: [/s/privacy-policy]
+- q: Show me villas for sale in Dammam
+  listing: {city: Dammam, purpose: sale, property_type: Villa}
+- q: 3-bedroom apartment for rent in Riyadh
+  listing: {city: Riyadh, purpose: rent, property_type: Apartment, bedrooms: 3}
+- q: Is there land for sale in Riyadh?
+  listing: {city: Riyadh, purpose: sale, property_type: Land}
+- q: Apartments for sale in Makkah under 1 million SAR
+  listing: {city: Makkah, purpose: sale, property_type: Apartment}
+- q: Villas for rent in Jeddah
+  listing: {city: Jeddah, purpose: rent, property_type: Villa}
+
+# --- Arabic -----------------------------------------------------------------
+- q: شقق للبيع في جدة
+  lang: ar
+  listing: {city: Jeddah, purpose: sale, property_type: Apartment}
+- q: فلل للإيجار في جدة
+  lang: ar
+  listing: {city: Jeddah, purpose: rent, property_type: Villa}
+- q: ما هي منصة وصلت؟
+  lang: ar
+  urls: [wasalt.sa/en/corporate, wasalt.sa/en$]
+- q: أخبرني عن برج ترامب في جدة
+  lang: ar
+  urls: [trump-tower-jeddah, trump-plaza-jeddah, /partners/the-trump-organization]
+- q: ما هي مشاريع دار جلوبال في عمان؟
+  lang: ar
+  urls: [/projects/properties-in-oman, aida]
+
+# --- Not in the corpus ------------------------------------------------------
+- q: How much does a Tesla Model 3 cost?
+  answerable: false
+- q: Does Dar Global have projects in Japan?
+  answerable: false
+- q: Write me a Python script that sorts a list.
+  answerable: false

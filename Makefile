@@ -1,4 +1,4 @@
-.PHONY: install test lint run extract index
+.PHONY: install test lint run extract index eval
 
 install:
 	uv sync
@@ -19,3 +19,6 @@ extract:
 
 index:
 	uv run python -m ingest.build_index
+
+eval:
+	uv run python -m evals.retrieval_eval
