@@ -87,19 +87,22 @@ class ChatRequest(BaseModel):
         return self
 
 
+def too_many(wait: float, message: str) -> HTTPException:
+    return HTTPException(
+        status_code=429, detail=message, headers={"Retry-After": str(math.ceil(wait))}
+    )
+
+
 async def rate_limit(request: Request) -> None:
-    # async on purpose: it runs on the event loop, so RateLimiter.check never races itself.
+    """Per-client limit. Runs before the passcode check, so guesses are throttled too.
+
+    async on purpose: it runs on the event loop, so RateLimiter.check never races itself.
+    """
     key = client_key(client_ip(request, get_settings().trusted_proxy_hops))
     ip_hash = request.state.ip_hash = app.state.hash_ip(key)
-    for limiter, scope, message in (
-        (app.state.limiter, ip_hash, "Too many messages. Please wait a moment and try again."),
-        (app.state.global_limiter, "*", "The assistant is busy. Please try again later."),
-    ):
-        if (wait := limiter.check(scope)) is not None:
-            log.info(json.dumps({"event": "rate_limited", "scope": scope, "ip_hash": ip_hash}))
-            raise HTTPException(
-                status_code=429, detail=message, headers={"Retry-After": str(math.ceil(wait))}
-            )
+    if (wait := app.state.limiter.check(ip_hash)) is not None:
+        log.info(json.dumps({"event": "rate_limited", "scope": "client", "ip_hash": ip_hash}))
+        raise too_many(wait, "Too many messages. Please wait a moment and try again.")
 
 
 def require_passcode(x_access_code: str | None = Header(default=None)) -> None:
@@ -130,6 +133,11 @@ def healthz() -> dict:
 # Rate limit first, so passcode guesses are limited too.
 @app.post("/api/chat", dependencies=[Depends(rate_limit), Depends(require_passcode)])
 async def chat(req: ChatRequest, request: Request) -> StreamingResponse:
+    # Service-wide quota is charged only now, after the passcode and body validation passed,
+    # so rejected requests cannot use it up.
+    if (wait := app.state.global_limiter.check("*")) is not None:
+        log.info(json.dumps({"event": "rate_limited", "scope": "global"}))
+        raise too_many(wait, "The assistant is busy. Please try again later.")
     settings, index = get_settings(), app.state.index
     question = req.messages[-1].content.strip()
     history = [m.model_dump() for m in req.messages[:-1]]

@@ -60,6 +60,19 @@ def test_global_limit_applies_across_clients(client, monkeypatch):
     assert r.status_code == 429 and "busy" in r.json()["detail"]
 
 
+def test_rejected_requests_do_not_use_the_global_quota(client, monkeypatch):
+    import app.main as main
+    from tests.test_api import fake_llm
+
+    monkeypatch.setattr(main, "stream_chat", fake_llm("ok"))
+    main.app.state.global_limiter = RateLimiter(per_minute=1, per_day=100)
+    for i in range(3):  # invalid bodies from different clients
+        bad = {"messages": [{"role": "user", "content": "x\x00"}]}
+        headers = {"X-Forwarded-For": f"198.51.100.{i}"}
+        assert client.post("/api/chat", json=bad, headers=headers).status_code == 422
+    assert ask(client, "hi", headers={"X-Forwarded-For": "198.51.100.9"}).status_code == 200
+
+
 def ask(client, content, **kw):
     return client.post("/api/chat", json={"messages": [{"role": "user", "content": content}]}, **kw)
 
