@@ -165,3 +165,15 @@ def parse(query: str) -> Filters:
 def english_terms(query: str) -> list[str]:
     """English spellings of Arabic names and city words in the query, for lexical search."""
     return [english for arabic, english in NAMES.items() if arabic in query]
+
+
+def follow_up(current: Filters, previous: Filters) -> Filters:
+    """ "what about Jeddah?" after "villas for sale in Riyadh" -> villas for sale in Jeddah.
+
+    The previous turn fills gaps only when the current turn sets a filter of its own, so an
+    unrelated question ("who is the CEO?") does not inherit listing filters.
+    """
+    if not current:
+        return current
+    merged = {k: v if v is not None else getattr(previous, k) for k, v in asdict(current).items()}
+    return Filters(**merged)

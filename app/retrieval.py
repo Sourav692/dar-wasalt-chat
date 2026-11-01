@@ -52,9 +52,11 @@ class Index:
     bm25: BM25Okapi
     manifest: dict
     is_listing: np.ndarray = field(init=False)
+    pos: dict[str, int] = field(init=False)  # chunk id -> row, for neighbour lookup
 
     def __post_init__(self) -> None:
         self.is_listing = np.array([c["kind"] == "listing" for c in self.chunks])
+        self.pos = {c["id"]: i for i, c in enumerate(self.chunks)}
 
 
 @dataclass

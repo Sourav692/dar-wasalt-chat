@@ -25,8 +25,7 @@ def satisfies(chunk: dict, item: dict) -> bool:
         )
     url = chunk["url"].lower()
     return any(
-        url.endswith(f[:-1].lower()) if f.endswith("$") else f.lower() in url
-        for f in item["urls"]
+        url.endswith(f[:-1].lower()) if f.endswith("$") else f.lower() in url for f in item["urls"]
     )
 
 

@@ -1,0 +1,35 @@
+from functools import lru_cache
+from pathlib import Path
+
+from pydantic import SecretStr
+from pydantic_settings import BaseSettings, SettingsConfigDict
+
+ROOT = Path(__file__).resolve().parent.parent
+
+
+class Settings(BaseSettings):
+    model_config = SettingsConfigDict(env_file=ROOT / ".env", extra="ignore", env_ignore_empty=True)
+
+    openrouter_api_key: SecretStr
+    # Comma-separated: primary first, then fallbacks (OpenRouter's `models` routing).
+    openrouter_models: str = "google/gemma-4-31b-it:free,nvidia/nemotron-3.5-lightning:free"
+    openrouter_url: str = "https://openrouter.ai/api/v1/chat/completions"
+    app_url: str = "https://github.com/Sourav692/dar-wasalt-chat"  # sent as HTTP-Referer
+    app_title: str = "Dar Global & Wasalt Assistant"
+    # Reasoning tokens count against max_tokens. Nemotron spent 1,466 of 1,500 on reasoning at
+    # effort=low and cut the answer off; disabling reasoning made it hallucinate instead.
+    max_tokens: int = 4000
+    temperature: float = 0.2
+    llm_timeout_s: float = 30.0  # per read; OpenRouter keep-alives reset it
+    llm_deadline_s: float = 50.0  # whole answer, inside Cloud Run's 60 s request timeout
+    index_dir: Path = ROOT / "index"
+    access_passcode: SecretStr | None = None
+
+    @property
+    def models(self) -> list[str]:
+        return [m.strip() for m in self.openrouter_models.split(",") if m.strip()]
+
+
+@lru_cache(maxsize=1)
+def get_settings() -> Settings:
+    return Settings()

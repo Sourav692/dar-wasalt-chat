@@ -1,9 +1,8 @@
 import numpy as np
 import pytest
-from rank_bm25 import BM25Okapi
 
 from app.constraints import Filters, english_terms, parse
-from app.retrieval import Index, lexical_text, search, tokenize
+from app.retrieval import search
 
 
 @pytest.mark.parametrize(
@@ -39,40 +38,6 @@ def test_unknown_values_never_match_a_set_filter():
 
 def test_arabic_names_map_to_english():
     assert english_terms("ما هي منصة وصلت؟") == ["Wasalt"]
-
-
-def chunk(i, kind="page", url=None, text="", meta=None):
-    return {
-        "id": f"c{i}",
-        "doc_id": f"d{i}",
-        "kind": kind,
-        "url": url or f"https://x.test/p{i}",
-        "title": "",
-        "text": text,
-        "meta": meta or {},
-    }
-
-
-@pytest.fixture
-def index():
-    chunks = [
-        chunk(0, text="Riyadh villa market overview and buying guide"),
-        chunk(
-            1,
-            "listing",
-            text="Villa for sale in Riyadh",
-            meta={"city": "Riyadh", "purpose": "sale", "property_type": "Villa", "price": 900_000},
-        ),
-        chunk(
-            2,
-            "listing",
-            text="Villa for sale in Jeddah",
-            meta={"city": "Jeddah", "purpose": "sale", "property_type": "Villa", "price": 800_000},
-        ),
-    ]
-    vectors = np.eye(3, dtype=np.float32)
-    bm25 = BM25Okapi([tokenize(lexical_text(c)) for c in chunks])
-    return Index(chunks, vectors, bm25, {"chunks": 3})
 
 
 def test_filters_drop_contradicting_listings_but_keep_pages(index):
