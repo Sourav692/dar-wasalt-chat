@@ -11,10 +11,11 @@ from typing import Literal
 import httpx
 from fastapi import Depends, FastAPI, Header, HTTPException, Request
 from fastapi.concurrency import run_in_threadpool
-from fastapi.responses import StreamingResponse
+from fastapi.responses import FileResponse, StreamingResponse
+from fastapi.staticfiles import StaticFiles
 from pydantic import BaseModel, Field, field_validator, model_validator
 
-from app.config import get_settings
+from app.config import ROOT, get_settings
 from app.constraints import follow_up, parse
 from app.llm import LLMError, stream_chat
 from app.prompt import build_messages
@@ -63,6 +64,13 @@ app = FastAPI(
 )
 app.add_middleware(BodyLimit, max_bytes=MAX_BODY_BYTES)
 app.add_middleware(SecurityHeaders)
+STATIC = ROOT / "app" / "static"
+app.mount("/static", StaticFiles(directory=STATIC), name="static")
+
+
+@app.api_route("/", methods=["GET", "HEAD"], include_in_schema=False)
+def index() -> FileResponse:
+    return FileResponse(STATIC / "index.html")
 
 
 class Message(BaseModel):
@@ -111,20 +119,20 @@ async def rate_limit(request: Request) -> None:
 async def require_passcode(x_access_code: str | None = Header(default=None)) -> None:
     """When ACCESS_PASSCODE is set, /api/chat needs a matching X-Access-Code header.
 
-    Wrong codes from all clients share one budget, so guessing from many IPs is capped too.
-    While it is spent, no code is compared and every request gets 429.
+    A correct code always gets through, so nobody can lock real users out. Wrong codes from
+    all clients share one budget: past it they get 429 instead of 401 and a warning is
+    logged. The real defence against guessing is the per-client limit plus a long random code.
     """
     expected = get_settings().access_passcode
     if expected is None:
         return
-    failures = app.state.auth_fail_limiter
-    if (wait := failures.blocked("*")) is not None:
-        log.warning(json.dumps({"event": "passcode_lockout"}))
-        raise too_many(wait, "Too many wrong access codes. Please try again later.")
     given = (x_access_code or "").encode()
-    if not hmac.compare_digest(given, expected.get_secret_value().encode()):
-        failures.check("*")
-        raise HTTPException(status_code=401, detail="Access code required.")
+    if hmac.compare_digest(given, expected.get_secret_value().encode()):
+        return
+    if (wait := app.state.auth_fail_limiter.check("*")) is not None:
+        log.warning(json.dumps({"event": "passcode_failures_over_budget"}))
+        raise too_many(wait, "Too many wrong access codes. Please try again later.")
+    raise HTTPException(status_code=401, detail="Access code required.")
 
 
 def sse(event: str, data: dict) -> str:
@@ -138,6 +146,7 @@ def healthz() -> dict:
         "status": "ok",
         "index": manifest["docs_sha256"][:12],
         "chunks": manifest["chunks"],
+        "snapshot_dates": manifest.get("snapshot_dates", []),
         "models": get_settings().models,
     }
 

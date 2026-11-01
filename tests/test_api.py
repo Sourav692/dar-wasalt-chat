@@ -143,8 +143,10 @@ def test_wrong_passcodes_share_a_global_budget(client, monkeypatch):
     get_settings.cache_clear()
     main.app.state.auth_fail_limiter = RateLimiter(per_minute=2, per_day=100)
     body = {"messages": [{"role": "user", "content": "hello"}]}
-    for i in range(2):  # two wrong guesses from two different clients
-        h = {"X-Access-Code": "nope", "X-Forwarded-For": f"198.51.100.{i}"}
-        assert client.post("/api/chat", json=body, headers=h).status_code == 401
-    right = {"X-Access-Code": "open-sesame", "X-Forwarded-For": "198.51.100.9"}
-    assert client.post("/api/chat", json=body, headers=right).status_code == 429  # locked
+
+    def post(code, client_no):
+        h = {"X-Access-Code": code, "X-Forwarded-For": f"198.51.100.{client_no}"}
+        return client.post("/api/chat", json=body, headers=h).status_code
+
+    assert [post("nope", i) for i in range(3)] == [401, 401, 429]  # budget spent
+    assert post("open-sesame", 9) == 200  # a correct code is never locked out
