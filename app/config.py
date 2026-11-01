@@ -1,7 +1,7 @@
 from functools import lru_cache
 from pathlib import Path
 
-from pydantic import SecretStr
+from pydantic import SecretStr, field_validator
 from pydantic_settings import BaseSettings, SettingsConfigDict
 
 ROOT = Path(__file__).resolve().parent.parent
@@ -35,6 +35,15 @@ class Settings(BaseSettings):
     # Proxies that append to X-Forwarded-For: 1 for Cloud Run's front end.
     trusted_proxy_hops: int = 1
     log_salt: SecretStr | None = None
+
+    @field_validator("access_passcode")
+    @classmethod
+    def passcode_is_long(cls, value: SecretStr | None) -> SecretStr | None:
+        # Correct codes are never locked out (that would hand attackers a denial of service),
+        # so guessing must be infeasible instead: 20 random characters is ~119 bits.
+        if value is not None and len(value.get_secret_value()) < 20:
+            raise ValueError("ACCESS_PASSCODE must be at least 20 characters; use a random one")
+        return value
 
     @property
     def models(self) -> list[str]:

@@ -125,13 +125,13 @@ async def test_stream_failures_raise(response, status):
 
 def test_passcode_enforced_when_set(client, monkeypatch):
     monkeypatch.setattr(main, "stream_chat", fake_llm("ok"))
-    monkeypatch.setenv("ACCESS_PASSCODE", "open-sesame")
+    monkeypatch.setenv("ACCESS_PASSCODE", "open-sesame-0123456789")
     get_settings.cache_clear()
     body = {"messages": [{"role": "user", "content": "hello"}]}
     assert client.post("/api/chat", json=body).status_code == 401
-    wrong = {"X-Access-Code": "open-sesamE"}
+    wrong = {"X-Access-Code": "open-sesame-0123456788"}
     assert client.post("/api/chat", json=body, headers=wrong).status_code == 401
-    right = {"X-Access-Code": "open-sesame"}
+    right = {"X-Access-Code": "open-sesame-0123456789"}
     assert client.post("/api/chat", json=body, headers=right).status_code == 200
 
 
@@ -139,7 +139,7 @@ def test_wrong_passcodes_share_a_global_budget(client, monkeypatch):
     from app.security import RateLimiter
 
     monkeypatch.setattr(main, "stream_chat", fake_llm("ok"))
-    monkeypatch.setenv("ACCESS_PASSCODE", "open-sesame")
+    monkeypatch.setenv("ACCESS_PASSCODE", "open-sesame-0123456789")
     get_settings.cache_clear()
     main.app.state.auth_fail_limiter = RateLimiter(per_minute=2, per_day=100)
     body = {"messages": [{"role": "user", "content": "hello"}]}
@@ -149,4 +149,11 @@ def test_wrong_passcodes_share_a_global_budget(client, monkeypatch):
         return client.post("/api/chat", json=body, headers=h).status_code
 
     assert [post("nope", i) for i in range(3)] == [401, 401, 429]  # budget spent
-    assert post("open-sesame", 9) == 200  # a correct code is never locked out
+    assert post("open-sesame-0123456789", 9) == 200  # a correct code is never locked out
+
+
+def test_short_passcode_refused_at_startup():
+    from pydantic import ValidationError
+
+    with pytest.raises(ValidationError):
+        Settings(openrouter_api_key="k", access_passcode="short", _env_file=None)
