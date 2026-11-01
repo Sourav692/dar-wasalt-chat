@@ -29,6 +29,9 @@ class Settings(BaseSettings):
     # Whole service: OpenRouter allows 1,000 free-model requests a day on an account with credit.
     global_per_minute: int = 60
     global_per_day: int = 1000
+    # Wrong passcodes across all clients; past this, codes are not even compared.
+    auth_fail_per_minute: int = 30
+    auth_fail_per_day: int = 500
     # Proxies that append to X-Forwarded-For: 1 for Cloud Run's front end.
     trusted_proxy_hops: int = 1
     log_salt: SecretStr | None = None

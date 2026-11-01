@@ -46,6 +46,9 @@ async def lifespan(app: FastAPI):
     app.state.hash_ip = IPHasher(salt)
     app.state.limiter = RateLimiter(settings.rate_per_minute, settings.rate_per_day)
     app.state.global_limiter = RateLimiter(settings.global_per_minute, settings.global_per_day)
+    app.state.auth_fail_limiter = RateLimiter(
+        settings.auth_fail_per_minute, settings.auth_fail_per_day
+    )
     app.state.http = httpx.AsyncClient(timeout=httpx.Timeout(settings.llm_timeout_s, connect=10))
     yield
     await app.state.http.aclose()
@@ -105,13 +108,22 @@ async def rate_limit(request: Request) -> None:
         raise too_many(wait, "Too many messages. Please wait a moment and try again.")
 
 
-def require_passcode(x_access_code: str | None = Header(default=None)) -> None:
-    """When ACCESS_PASSCODE is set, /api/chat needs a matching X-Access-Code header."""
+async def require_passcode(x_access_code: str | None = Header(default=None)) -> None:
+    """When ACCESS_PASSCODE is set, /api/chat needs a matching X-Access-Code header.
+
+    Wrong codes from all clients share one budget, so guessing from many IPs is capped too.
+    While it is spent, no code is compared and every request gets 429.
+    """
     expected = get_settings().access_passcode
     if expected is None:
         return
+    failures = app.state.auth_fail_limiter
+    if (wait := failures.blocked("*")) is not None:
+        log.warning(json.dumps({"event": "passcode_lockout"}))
+        raise too_many(wait, "Too many wrong access codes. Please try again later.")
     given = (x_access_code or "").encode()
     if not hmac.compare_digest(given, expected.get_secret_value().encode()):
+        failures.check("*")
         raise HTTPException(status_code=401, detail="Access code required.")
 
 

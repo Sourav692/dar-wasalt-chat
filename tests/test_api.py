@@ -133,3 +133,18 @@ def test_passcode_enforced_when_set(client, monkeypatch):
     assert client.post("/api/chat", json=body, headers=wrong).status_code == 401
     right = {"X-Access-Code": "open-sesame"}
     assert client.post("/api/chat", json=body, headers=right).status_code == 200
+
+
+def test_wrong_passcodes_share_a_global_budget(client, monkeypatch):
+    from app.security import RateLimiter
+
+    monkeypatch.setattr(main, "stream_chat", fake_llm("ok"))
+    monkeypatch.setenv("ACCESS_PASSCODE", "open-sesame")
+    get_settings.cache_clear()
+    main.app.state.auth_fail_limiter = RateLimiter(per_minute=2, per_day=100)
+    body = {"messages": [{"role": "user", "content": "hello"}]}
+    for i in range(2):  # two wrong guesses from two different clients
+        h = {"X-Access-Code": "nope", "X-Forwarded-For": f"198.51.100.{i}"}
+        assert client.post("/api/chat", json=body, headers=h).status_code == 401
+    right = {"X-Access-Code": "open-sesame", "X-Forwarded-For": "198.51.100.9"}
+    assert client.post("/api/chat", json=body, headers=right).status_code == 429  # locked

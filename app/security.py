@@ -98,6 +98,13 @@ class RateLimiter:
 
     def check(self, key: str) -> float | None:
         """Record a hit and return None, or return seconds to wait if a limit is reached."""
+        wait = self.blocked(key)
+        if wait is None:
+            self.hits[key].append(self.clock())
+        return wait
+
+    def blocked(self, key: str) -> float | None:
+        """Seconds to wait if `key` is at a limit, else None. Records nothing."""
         now = self.clock()
         hits = self.hits.get(key)
         if hits is None:
@@ -112,7 +119,6 @@ class RateLimiter:
             recent = [t for t in hits if now - t < window]
             if len(recent) >= limit:
                 return round(window - (now - recent[0]), 1)
-        hits.append(now)
         return None
 
 
