@@ -1,6 +1,7 @@
 #!/usr/bin/env bash
 # One-time GCP setup for CI/CD from GitHub Actions with Workload Identity Federation (no keys).
 # Safe to re-run: every create is skipped when the resource exists; IAM bindings are idempotent.
+# (An existing provider keeps its old attribute mapping; update it by hand if this file changes.)
 #
 #   PROJECT=my-project REPO=owner/name ./infra/setup-gcp.sh
 #
@@ -52,13 +53,14 @@ g iam workload-identity-pools providers describe "$PROVIDER" --location global \
   g iam workload-identity-pools providers create-oidc "$PROVIDER" --location global \
     --workload-identity-pool "$POOL" --display-name "GitHub OIDC" \
     --issuer-uri https://token.actions.githubusercontent.com \
-    --attribute-mapping "google.subject=assertion.sub,attribute.repository=assertion.repository,attribute.repo_ref=assertion.repository+'@'+assertion.ref" \
+    --attribute-mapping "google.subject=assertion.sub,attribute.repository=assertion.repository,attribute.workflow_ref=assertion.job_workflow_ref" \
     --attribute-condition "assertion.repository == '$REPO'"
 
-# CI (any branch or PR in the repo) may read the index; only main may deploy.
+# CI (any branch or PR in the repo) may read the index. Deploying needs the job to run from
+# ci.yml on main: a new workflow file, or ci.yml on another branch, cannot use the deploy account.
 g iam service-accounts add-iam-policy-binding "$CI_SA" --role roles/iam.workloadIdentityUser \
   --member "$PRINCIPAL/attribute.repository/$REPO" >/dev/null
 g iam service-accounts add-iam-policy-binding "$DEPLOY_SA" --role roles/iam.workloadIdentityUser \
-  --member "$PRINCIPAL/attribute.repo_ref/$REPO@refs/heads/main" >/dev/null
+  --member "$PRINCIPAL/attribute.workflow_ref/$REPO/.github/workflows/ci.yml@refs/heads/main" >/dev/null
 
 echo "WIF provider: projects/$NUMBER/locations/global/workloadIdentityPools/$POOL/providers/$PROVIDER"
