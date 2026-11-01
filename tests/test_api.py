@@ -3,7 +3,6 @@ import json
 import httpx
 import numpy as np
 import pytest
-from fastapi.testclient import TestClient
 
 import app.main as main
 from app.config import Settings, get_settings
@@ -20,18 +19,6 @@ def sse_events(body: str) -> list[tuple[str, dict]]:
         elif line.startswith("data: "):
             events.append((name, json.loads(line[6:])))
     return events
-
-
-@pytest.fixture
-def client(index, monkeypatch):
-    monkeypatch.setenv("OPENROUTER_API_KEY", "test-key")
-    get_settings.cache_clear()
-    monkeypatch.setattr(main, "load_index", lambda _path: index)
-    monkeypatch.setattr(main, "embed_query", lambda _text: VEC)
-    monkeypatch.setattr("app.retrieval.embed_query", lambda _text: VEC)
-    with TestClient(main.app) as c:
-        yield c
-    get_settings.cache_clear()
 
 
 def fake_llm(*pieces, error=None):

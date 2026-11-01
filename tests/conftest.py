@@ -1,7 +1,10 @@
 import numpy as np
 import pytest
+from fastapi.testclient import TestClient
 from rank_bm25 import BM25Okapi
 
+import app.main as main
+from app.config import get_settings
 from app.retrieval import Index, lexical_text, tokenize
 
 
@@ -49,3 +52,18 @@ def index():
 @pytest.fixture
 def anyio_backend():
     return "asyncio"
+
+
+VEC = np.ones(3, dtype=np.float32)
+
+
+@pytest.fixture
+def client(index, monkeypatch):
+    monkeypatch.setenv("OPENROUTER_API_KEY", "test-key")
+    get_settings.cache_clear()
+    monkeypatch.setattr(main, "load_index", lambda _path: index)
+    monkeypatch.setattr(main, "embed_query", lambda _text: VEC)
+    monkeypatch.setattr("app.retrieval.embed_query", lambda _text: VEC)
+    with TestClient(main.app) as c:
+        yield c
+    get_settings.cache_clear()

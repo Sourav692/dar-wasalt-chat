@@ -3,25 +3,37 @@
 import hmac
 import json
 import logging
+import math
 import time
 from contextlib import asynccontextmanager
 from typing import Literal
 
 import httpx
-from fastapi import Depends, FastAPI, Header, HTTPException
+from fastapi import Depends, FastAPI, Header, HTTPException, Request
 from fastapi.concurrency import run_in_threadpool
 from fastapi.responses import StreamingResponse
-from pydantic import BaseModel, Field, model_validator
+from pydantic import BaseModel, Field, field_validator, model_validator
 
 from app.config import get_settings
 from app.constraints import follow_up, parse
 from app.llm import LLMError, stream_chat
 from app.prompt import build_messages
 from app.retrieval import embed_query, load_index, search
+from app.security import (
+    FORBIDDEN_CHARS,
+    BodyLimit,
+    IPHasher,
+    RateLimiter,
+    SecurityHeaders,
+    client_ip,
+)
 
 logging.basicConfig(level=logging.INFO, format="%(message)s")
 log = logging.getLogger("app")
 MAX_QUESTION_CHARS = 2000
+MAX_MESSAGES = 13  # 6 earlier turns + the new question
+# 13 messages x 4,000 chars x up to 2 bytes (Arabic UTF-8) is ~104 KB, plus JSON overhead.
+MAX_BODY_BYTES = 128 * 1024
 
 
 @asynccontextmanager
@@ -29,23 +41,39 @@ async def lifespan(app: FastAPI):
     settings = get_settings()
     app.state.index = load_index(settings.index_dir)
     embed_query("warm up")  # load the embedding model now, not on the first question
+    salt = settings.log_salt.get_secret_value() if settings.log_salt else None
+    app.state.hash_ip = IPHasher(salt)
+    app.state.limiter = RateLimiter(settings.rate_per_minute, settings.rate_per_day)
     app.state.http = httpx.AsyncClient(timeout=httpx.Timeout(settings.llm_timeout_s, connect=10))
     yield
     await app.state.http.aclose()
 
 
 app = FastAPI(
-    title="Dar Global & Wasalt Assistant", docs_url=None, redoc_url=None, lifespan=lifespan
+    title="Dar Global & Wasalt Assistant",
+    docs_url=None,
+    redoc_url=None,
+    openapi_url=None,
+    lifespan=lifespan,
 )
+app.add_middleware(BodyLimit, max_bytes=MAX_BODY_BYTES)
+app.add_middleware(SecurityHeaders)
 
 
 class Message(BaseModel):
     role: Literal["user", "assistant"]
-    content: str = Field(min_length=1, max_length=4000)
+    content: str = Field(min_length=1, max_length=4000)  # answers can run past 2,000 chars
+
+    @field_validator("content")
+    @classmethod
+    def no_control_chars(cls, value: str) -> str:
+        if FORBIDDEN_CHARS.search(value):
+            raise ValueError("message contains control or bidi-override characters")
+        return value
 
 
 class ChatRequest(BaseModel):
-    messages: list[Message] = Field(min_length=1, max_length=20)
+    messages: list[Message] = Field(min_length=1, max_length=MAX_MESSAGES)
 
     @model_validator(mode="after")
     def ends_with_question(self):
@@ -55,6 +83,18 @@ class ChatRequest(BaseModel):
         if len(last.content) > MAX_QUESTION_CHARS:
             raise ValueError(f"questions are limited to {MAX_QUESTION_CHARS} characters")
         return self
+
+
+def rate_limit(request: Request) -> None:
+    ip_hash = app.state.hash_ip(client_ip(request, get_settings().trusted_proxy_hops))
+    request.state.ip_hash = ip_hash
+    if (wait := app.state.limiter.check(ip_hash)) is not None:
+        log.info(json.dumps({"event": "rate_limited", "ip_hash": ip_hash}))
+        raise HTTPException(
+            status_code=429,
+            detail="Too many messages. Please wait a moment and try again.",
+            headers={"Retry-After": str(math.ceil(wait))},
+        )
 
 
 def require_passcode(x_access_code: str | None = Header(default=None)) -> None:
@@ -82,8 +122,9 @@ def healthz() -> dict:
     }
 
 
-@app.post("/api/chat", dependencies=[Depends(require_passcode)])
-async def chat(req: ChatRequest) -> StreamingResponse:
+# Rate limit first, so passcode guesses are limited too.
+@app.post("/api/chat", dependencies=[Depends(rate_limit), Depends(require_passcode)])
+async def chat(req: ChatRequest, request: Request) -> StreamingResponse:
     settings, index = get_settings(), app.state.index
     question = req.messages[-1].content.strip()
     history = [m.model_dump() for m in req.messages[:-1]]
@@ -126,6 +167,7 @@ async def chat(req: ChatRequest) -> StreamingResponse:
                 json.dumps(
                     {
                         "event": "chat",
+                        "ip_hash": request.state.ip_hash,
                         "status": status,
                         "model": model,
                         "latency_ms": round((time.monotonic() - started) * 1000),

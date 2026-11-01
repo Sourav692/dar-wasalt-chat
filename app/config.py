@@ -24,6 +24,11 @@ class Settings(BaseSettings):
     llm_deadline_s: float = 50.0  # whole answer, inside Cloud Run's 60 s request timeout
     index_dir: Path = ROOT / "index"
     access_passcode: SecretStr | None = None
+    rate_per_minute: int = 10
+    rate_per_day: int = 100
+    # Proxies that append to X-Forwarded-For: 1 for Cloud Run's front end.
+    trusted_proxy_hops: int = 1
+    log_salt: SecretStr | None = None
 
     @property
     def models(self) -> list[str]:
