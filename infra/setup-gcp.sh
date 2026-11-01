@@ -18,12 +18,12 @@ POOL=github
 PROVIDER=github
 RUNTIME_SA=chat-runtime@$PROJECT.iam.gserviceaccount.com   # what the service runs as
 DEPLOY_SA=gh-deploy@$PROJECT.iam.gserviceaccount.com       # main-branch deploys
-CI_SA=gh-ci@$PROJECT.iam.gserviceaccount.com               # every CI run: read the index
+CI_SA=gh-ci-reader@$PROJECT.iam.gserviceaccount.com               # every CI run: read the index
 PRINCIPAL=principalSet://iam.googleapis.com/projects/$NUMBER/locations/global/workloadIdentityPools/$POOL
 
 g() { gcloud --project "$PROJECT" --quiet "$@"; }
 
-for sa in chat-runtime:"Chat service runtime" gh-deploy:"GitHub deploy" gh-ci:"GitHub CI"; do
+for sa in chat-runtime:"Chat service runtime" gh-deploy:"GitHub deploy" gh-ci-reader:"GitHub CI"; do
   id=${sa%%:*}
   g iam service-accounts describe "$id@$PROJECT.iam.gserviceaccount.com" >/dev/null 2>&1 ||
     g iam service-accounts create "$id" --display-name "${sa#*:}"
