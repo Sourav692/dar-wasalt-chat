@@ -2,6 +2,7 @@
 # all of them pass on main. GCP access is keyless (Workload Identity Federation, see
 # infra/setup-gcp.sh): CI may only read the index; only main may deploy.
 name: ci
+# Actions are pinned to commit SHAs (the deploy job holds GCP credentials); Dependabot bumps them.
 
 on:
   pull_request:
@@ -28,8 +29,8 @@ jobs:
   test:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v7
-      - uses: astral-sh/setup-uv@v10
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+      - uses: astral-sh/setup-uv@68559e99cc807c1eb7e9238fd43a15bba460eec2 # v10.3.3
       - run: uv sync --frozen
       - run: uv run ruff check .
       - run: uv run ruff format --check .
@@ -38,12 +39,12 @@ jobs:
   secrets:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v7
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
           fetch-depth: 0 # scan the whole history, not just this commit
       - name: gitleaks
         run: >-
-          docker run --rm -v "$PWD:/repo" ghcr.io/gitleaks/gitleaks:v8.30.1
+          docker run --rm -v "$PWD:/repo" ghcr.io/gitleaks/gitleaks:v8.30.1@sha256:c00b6bd0aeb3071cbcb79009cb16a60dd9e0a7c60e2be9ab65d25e6bc8abbb7f
           git /repo --redact --verbose --exit-code 1
 
   retrieval:
@@ -54,14 +55,14 @@ jobs:
       contents: read
       id-token: write
     steps:
-      - uses: actions/checkout@v7
-      - uses: google-github-actions/auth@v3
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+      - uses: google-github-actions/auth@7c6bc770dae815cd3e89ee6cdf493a5fab2cc093 # v3.0.0
         with:
           workload_identity_provider: ${{ env.WIF_PROVIDER }}
           service_account: gh-ci@${{ env.PROJECT }}.iam.gserviceaccount.com
-      - uses: google-github-actions/setup-gcloud@v3
+      - uses: google-github-actions/setup-gcloud@aa5489c8933f4cc7a4f7d45035b3b1440c9c10db # v3.0.1
       - run: mkdir -p index && gcloud storage cp "$INDEX/*" index/
-      - uses: astral-sh/setup-uv@v10
+      - uses: astral-sh/setup-uv@68559e99cc807c1eb7e9238fd43a15bba460eec2 # v10.3.3
       - run: uv sync --frozen
       - run: uv run python -m evals.retrieval_eval # exits 1 below hit@5 0.85
 
@@ -76,12 +77,12 @@ jobs:
     env:
       IMAGE: asia-south1-docker.pkg.dev/dar-wasalt-chat-22ytj/app/chat:${{ github.sha }}
     steps:
-      - uses: actions/checkout@v7
-      - uses: google-github-actions/auth@v3
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+      - uses: google-github-actions/auth@7c6bc770dae815cd3e89ee6cdf493a5fab2cc093 # v3.0.0
         with:
           workload_identity_provider: ${{ env.WIF_PROVIDER }}
           service_account: gh-deploy@${{ env.PROJECT }}.iam.gserviceaccount.com
-      - uses: google-github-actions/setup-gcloud@v3
+      - uses: google-github-actions/setup-gcloud@aa5489c8933f4cc7a4f7d45035b3b1440c9c10db # v3.0.1
       - run: mkdir -p index && gcloud storage cp "$INDEX/*" index/
       - run: gcloud auth configure-docker "$REGION-docker.pkg.dev" --quiet
       - run: docker build -t "$IMAGE" . && docker push "$IMAGE"

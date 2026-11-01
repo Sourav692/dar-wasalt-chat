@@ -1,6 +1,6 @@
 # Build: needs ./index (make index, or pulled from GCS in CI). Run: docker run -p 8000:8000 --env-file .env
-FROM python:3.12-slim AS builder
-COPY --from=ghcr.io/astral-sh/uv:0.13 /uv /bin/uv
+FROM python:3.12-slim@sha256:aa943ce411423c7582288f18707ff66eddcbaeb510502d747a72aeb34f30d159 AS builder
+COPY --from=ghcr.io/astral-sh/uv:0.13.6@sha256:af22a52f5eafef3d78e551599d405c02df61919d18028f0cea8eda93bc9986d0 /uv /bin/uv
 ENV UV_COMPILE_BYTECODE=1 UV_LINK_MODE=copy UV_PYTHON_DOWNLOADS=never \
     FASTEMBED_CACHE_PATH=/opt/fastembed
 WORKDIR /app
@@ -12,7 +12,7 @@ COPY app/retrieval.py app/constraints.py app/
 RUN .venv/bin/python -c "from fastembed import TextEmbedding; \
 from app.retrieval import MODEL; TextEmbedding(MODEL)"
 
-FROM python:3.12-slim
+FROM python:3.12-slim@sha256:aa943ce411423c7582288f18707ff66eddcbaeb510502d747a72aeb34f30d159
 RUN useradd --system --uid 10001 --no-create-home app
 ENV PATH=/app/.venv/bin:$PATH PYTHONUNBUFFERED=1 PYTHONDONTWRITEBYTECODE=1 \
     FASTEMBED_CACHE_PATH=/opt/fastembed HF_HUB_OFFLINE=1 PORT=8000
