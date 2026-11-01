@@ -1,0 +1,80 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Ask about Dar Global and Wasalt</title>
+  <meta name="description" content="An unofficial assistant that answers questions about Dar Global projects and Wasalt listings from a snapshot of their public websites, with sources.">
+  <link rel="stylesheet" href="/static/app.css">
+  <script src="/static/app.js" defer></script>
+</head>
+<body>
+  <a class="skip" href="#question">Skip to the question box</a>
+
+  <header class="bar">
+    <a class="wordmark" href="/" aria-label="Dar Global and Wasalt assistant, start over">Dar Global &amp; Wasalt assistant</a>
+    <span class="tag tag--out">Unofficial demo</span>
+    <button class="btn btn--quiet bar__new" type="button" id="new-chat" hidden>New chat</button>
+  </header>
+
+  <main class="chat" id="chat">
+    <section class="welcome" id="welcome" aria-labelledby="welcome-head">
+      <h1 id="welcome-head">Ask about Dar Global projects or Wasalt listings.</h1>
+      <p class="welcome__lede">Answers come from <span id="snapshot-phrase">a snapshot of the two companies’ public websites</span>, with the pages they came from listed under each one. Ask in English or Arabic.</p>
+      <ul class="ruled examples" aria-label="Example questions">
+        <li><button class="example" type="button">Where is Tierra Viva, and who designed it?</button></li>
+        <li><button class="example" type="button">3-bedroom apartments for rent in Riyadh</button></li>
+        <li><button class="example" type="button">What does Wasalt Business offer brokers?</button></li>
+        <li><button class="example" type="button" dir="rtl" lang="ar">فلل للبيع في الخبر</button></li>
+      </ul>
+      <p class="welcome__note">Not affiliated with Dar Global or Wasalt. Prices and availability are as of the snapshot date, so check the official sites before acting on them.</p>
+    </section>
+
+    <ol class="thread" id="thread" aria-label="Conversation"></ol>
+    <noscript><p class="welcome__note">This assistant needs JavaScript to send questions and stream answers.</p></noscript>
+  </main>
+
+  <form class="composer" id="composer" novalidate>
+    <div class="composer__inner">
+      <div class="passcode" id="passcode-row" hidden>
+        <label for="passcode">Access code</label>
+        <input class="input" id="passcode" name="passcode" type="password" autocomplete="off">
+      </div>
+      <label class="visually-hidden" for="question">Your question</label>
+      <div class="composer__row">
+        <textarea class="input composer__field" id="question" name="question" rows="1" maxlength="2000" dir="auto" placeholder="Ask a question" aria-describedby="composer-help" required></textarea>
+        <button class="btn btn--primary" type="submit" id="send">Send</button>
+      </div>
+      <p class="composer__help" id="composer-help" aria-live="polite"><span id="help-text">Unofficial demo. Enter sends, Shift+Enter adds a line.</span> <span class="num" id="count"></span></p>
+    </div>
+  </form>
+
+  <template id="tpl-user">
+    <li class="turn turn--user"><p class="bubble" dir="auto"></p></li>
+  </template>
+
+  <template id="tpl-answer">
+    <li class="turn turn--answer" aria-busy="true">
+      <p class="status" role="status">Searching the snapshot…</p>
+      <div class="answer" dir="auto"></div>
+      <p class="error" hidden><span class="error__text"></span> <button class="btn btn--quiet retry" type="button">Try again</button></p>
+      <section class="sources" hidden>
+        <h2 class="sources__head">Sources</h2>
+        <ol class="ruled sources__list"></ol>
+        <details class="sources__more" hidden>
+          <summary></summary>
+          <ol class="ruled sources__rest"></ol>
+        </details>
+      </section>
+    </li>
+  </template>
+
+  <template id="tpl-source">
+    <li class="source">
+      <span class="source__n num"></span>
+      <a class="source__title" target="_blank" rel="noopener noreferrer"></a>
+      <span class="source__meta"><span class="source__site"></span>, <span class="source__kind"></span>, snapshot <time class="source__date"></time></span>
+    </li>
+  </template>
+</body>
+</html>

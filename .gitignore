@@ -10,3 +10,4 @@ __pycache__/
 *.pyc
 .DS_Store
 FDE_Technical_Assignment.docx
+.hallmark/
