@@ -139,8 +139,8 @@ def sse(event: str, data: dict) -> str:
     return f"event: {event}\ndata: {json.dumps(data, ensure_ascii=False)}\n\n"
 
 
-@app.get("/healthz")
-def healthz() -> dict:
+@app.get("/health")  # not /healthz: Cloud Run reserves paths ending in "z"
+def health() -> dict:
     manifest = app.state.index.manifest
     return {
         "status": "ok",

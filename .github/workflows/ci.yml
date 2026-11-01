@@ -96,7 +96,7 @@ jobs:
       - name: Smoke test
         run: |
           url=$(gcloud run services describe "$SERVICE" --project "$PROJECT" --region "$REGION" --format 'value(status.url)')
-          curl -fsS "$url/healthz"
+          curl -fsS "$url/health"
           curl -fsS -N --max-time 60 "$url/api/chat" -H 'content-type: application/json' \
             -d '{"messages":[{"role":"user","content":"Where is Tierra Viva?"}]}' | tee reply.txt | tail -3
           grep -q '^event: done' reply.txt

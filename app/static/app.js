@@ -402,7 +402,7 @@ els.newChat.addEventListener("click", () => {
 });
 
 // The snapshot dates come from the index manifest, so the copy never drifts from the data.
-fetch("/healthz")
+fetch("/health")
   .then((r) => (r.ok ? r.json() : null))
   .then((h) => {
     const dates = (h?.snapshot_dates || []).map((d) => {

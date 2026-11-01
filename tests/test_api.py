@@ -34,8 +34,8 @@ def fake_llm(*pieces, error=None):
     return stream
 
 
-def test_healthz(client):
-    body = client.get("/healthz").json()
+def test_health(client):
+    body = client.get("/health").json()
     assert body["status"] == "ok" and body["chunks"] == 3
 
 

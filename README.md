@@ -10,5 +10,5 @@ Work in progress.
 make install   # uv sync + Playwright Chromium
 cp .env.example .env   # add your OpenRouter key
 make test
-make run       # http://localhost:8000/healthz
+make run       # http://localhost:8000/health
 ```

@@ -97,7 +97,7 @@ def test_oversized_body_rejected(client):
 
 
 def test_security_headers_on_every_response(client):
-    headers = client.get("/healthz").headers
+    headers = client.get("/health").headers
     assert "frame-ancestors 'none'" in headers["content-security-policy"]
     assert headers["x-content-type-options"] == "nosniff"
     assert client.get("/openapi.json").status_code == 404
