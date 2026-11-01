@@ -1,4 +1,4 @@
-.PHONY: install test lint run extract index eval judge redteam docker-build docker-run
+.PHONY: install test lint run crawl extract index eval judge redteam docker-build docker-run
 
 install:
 	uv sync
@@ -13,6 +13,10 @@ lint:
 
 run:
 	uv run uvicorn app.main:app --reload --port 8000
+
+# Polite crawl (robots.txt, 5 s delay); writes data/raw/. Wasalt pages are saved by hand.
+crawl:
+	uv run python -m crawler.crawl
 
 extract:
 	uv run python -m crawler.extract

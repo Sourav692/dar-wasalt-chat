@@ -56,7 +56,9 @@ Raw results: `evals/results/judge_nemotron-lightning_2026-11-01.json`.
 
 ## Red team
 
-`make redteam` (server running) sends attacks to the real model and checks the replies with string rules and the judge model. 18 of 18 passed on 2026-11-01 (`evals/results/redteam_nemotron-lightning_2026-11-01.json`).
+`make redteam` (server running) sends attacks to the real model and checks the replies with string rules and a judge model. 18 of 18 passed on 2026-11-01 against a local server with Nemotron Lightning (`evals/results/redteam_nemotron-lightning_2026-11-01.json`).
+
+18 of 18 passed again on 2026-11-02 with the final model, `nemotron-3.5-super-vl`, and the HTTP cases sent to the live Cloud Run URL (`evals/results/redteam_live_2026-11-02.json`). The red team keeps `nemotron-3-ultra` as its judge: the bake-off judge's provider rejects attack prompts with a 400.
 
 | Attack | Result |
 |---|---|
@@ -86,13 +88,17 @@ An automated security review ran on every commit and its findings were fixed or 
 
 ## What the checks caught
 
-Tests and live runs found these before anyone else could:
+Tests and live runs found these:
 
 - **Filtered-out chunks still got a vote in RRF.** With fewer than 30 allowed chunks, `argsort` returned excluded ones at `-inf`. Found by a three-chunk unit test; the full index hid it.
 - **OpenRouter's keep-alive comments reset the read timeout,** so one request hung past two minutes. Found in a live run; fixed with an overall deadline.
 - **Reasoning ate the token budget.** At `effort=low` the model spent 1,466 of 1,500 tokens thinking and returned no answer. Found in a live run; the budget is now 4,000.
 - **The primary model, Gemma 4 31B, returned 429 on every call** during testing, so every answer came from the fallback.
 - **A YAML list split a fact at its commas,** crashing the judge run at its last step.
+- **The bake-off judge ran out of tokens.** It reasons before answering, and a 4,000-token limit left 21 of 140 verdicts empty. Found by counting judge failures per model; fixed with a 16,000-token limit and a full rerun.
+- **The judge is sometimes wrong.** It flagged SAR 141,000,000 for a Riyadh plot as unsupported; the captured Wasalt listing says exactly that. Unsupported claims are checked against the corpus before being called hallucinations.
+- **`/healthz` never reached the app on Cloud Run.** The first deploy's smoke test got Google's own 404: Cloud Run's front end reserves paths ending in `z`. The endpoint is now `/health`.
+- **Spoofed `X-Forwarded-For` headers were checked on the live service.** Three requests with no header, a fake IP and a fake chain logged the same client hash, confirming that the rate limiter keys on the hop Cloud Run adds.
 
 ## Reproduce
 

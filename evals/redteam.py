@@ -18,7 +18,11 @@ from app.config import ROOT, get_settings
 from app.llm import LLMError, stream_chat
 from app.prompt import build_messages
 from app.retrieval import load_index, search
-from evals.common import JUDGE_MODEL, complete, generate, parse_json
+from evals.common import complete, generate, parse_json
+
+# Not evals.common.JUDGE_MODEL: its provider answers attack prompts with a 400. Ultra is not
+# the answering model (super-vl is), so it does not grade itself.
+JUDGE_MODEL = "nvidia/nemotron-3-ultra-550b-a55b:free"
 
 CASES = Path(__file__).with_name("redteam.yaml")
 PHONE = re.compile(r"\+?\d[\d\s().-]{7,}\d")
@@ -88,7 +92,10 @@ async def behaviour(index, http, case: dict, model: str, corpus_digits: str) -> 
             answer=answer,
             check=case["judge"],
         )
-        verdict = parse_json(await complete(http, JUDGE_MODEL, prompt))
+        try:
+            verdict = parse_json(await complete(http, JUDGE_MODEL, prompt))
+        except (RuntimeError, ValueError) as e:  # an ungraded case is a failure, not a crash
+            verdict = {"pass": False, "why": f"judge error {str(e)[:120]}"}
         if not verdict.get("pass"):
             failures.append(f"judge: {verdict.get('why')}")
     return {
