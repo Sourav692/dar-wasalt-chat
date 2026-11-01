@@ -1,4 +1,4 @@
-.PHONY: install test lint run extract index eval
+.PHONY: install test lint run extract index eval judge redteam
 
 install:
 	uv sync
@@ -22,3 +22,10 @@ index:
 
 eval:
 	uv run python -m evals.retrieval_eval
+
+# Live model calls; need OPENROUTER_API_KEY. redteam's HTTP cases need `make run` first.
+judge:
+	uv run python -m evals.judge_eval
+
+redteam:
+	uv run python -m evals.redteam --url http://localhost:8000

@@ -18,7 +18,7 @@
   facts: [Business Bay, Dubai Canal]
 - q: Tell me about the Da Vinci Tower by Pagani
   urls: [/davinci-tower-by-pagani, da-vinci-tower-by-pagani, /partners/pagani]
-  facts: [Dubai, 2, 3 and 4-bedroom residences]
+  facts: [Dubai, "2, 3 and 4-bedroom residences"]
 - q: What is AIDA in Oman?
   urls: [aida]
   facts: [Muscat, Trump golf course]

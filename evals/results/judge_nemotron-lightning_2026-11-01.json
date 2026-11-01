@@ -1,0 +1,2414 @@
+{
+  "judge": "nvidia/nemotron-3-ultra-550b-a55b:free",
+  "summaries": [
+    {
+      "model": "nvidia/nemotron-3.5-lightning:free",
+      "questions": 35,
+      "errors": 4,
+      "judge_failures": 0,
+      "faithfulness": 0.984,
+      "citations_ok": 0.75,
+      "fact_recall": 0.733,
+      "declined_unanswerable": "3/3",
+      "arabic_same_language": "4/4",
+      "p50_s": 10.72,
+      "p95_s": 23.19
+    }
+  ],
+  "rows": {
+    "nvidia/nemotron-3.5-lightning:free": [
+      {
+        "question": "Where is Tierra Viva located?",
+        "answer": "Tierra Viva is located in Benahavís, Spain, on the Costa del Sol, nestled in the hills of Los Jaralillos. It is approximately 8–15 minutes by car from Marbella. [1][3][5]",
+        "model": "nvidia/nemotron-3.5-lightning:free",
+        "finish": "stop",
+        "error": null,
+        "latency_s": 10.72,
+        "sources": [
+          {
+            "title": "Tierra Viva by Lamborghini | Luxury Villas Benahavis",
+            "url": "https://darglobal.co.uk/tierra-viva",
+            "site": "darglobal",
+            "kind": "page",
+            "snapshot_date": "2026-10-31",
+            "n": 1
+          },
+          {
+            "title": "Tierra Viva: An Example of How the Automotive Industry is Shaping Luxury Real-Estate - DarGlobal",
+            "url": "https://darglobal.co.uk/blog/tierra-viva-an-example-of-how-the-automotive-industry-is-shaping-luxury-real-estate",
+            "site": "darglobal",
+            "kind": "page",
+            "snapshot_date": "2026-10-31",
+            "n": 2
+          },
+          {
+            "title": "Lamborghini - House of Brands",
+            "url": "https://darglobal.co.uk/partners/lamborghini",
+            "site": "darglobal",
+            "kind": "page",
+            "snapshot_date": "2026-10-31",
+            "n": 3
+          },
+          {
+            "title": "Dar Global Showcases Tierra Viva at Lamborghini Lounge Porto Cervo 2025",
+            "url": "https://darglobal.co.uk/press/dar-global-lamborghini-lounge-porto-cervo-summer",
+            "site": "darglobal",
+            "kind": "page",
+            "snapshot_date": "2026-10-31",
+            "n": 4
+          },
+          {
+            "title": "Tierra Viva Launch Event in Puerto Banús",
+            "url": "https://darglobal.co.uk/blog/experience-the-extraordinary-tierra-viva-launch-event-in-puerto-banus",
+            "site": "darglobal",
+            "kind": "page",
+            "snapshot_date": "2026-10-31",
+            "n": 5
+          },
+          {
+            "title": "DarGlobal Appoints Ene Construccion Amaz SL as Main Contractor for Tierra Viva – A Luxury Villa Development with Design Inspired by Automobili Lamborghini",
+            "url": "https://darglobal.co.uk/press/darglobal-appoints-ene-construccion-as-main-contractor-for-tierra-viva-luxury-villas",
+            "site": "darglobal",
+            "kind": "page",
+            "snapshot_date": "2026-10-31",
+            "n": 6
+          }
+        ],
+        "grade": {
+          "claims": 4,
+          "supported": 4,
+          "citations_ok": true,
+          "declined": false,
+          "same_language": true,
+          "unsupported": []
+        },
+        "fact_recall": 0.6666666666666666,
+        "answerable": true,
+        "lang": "en"
+      },
+      {
+        "question": "Which car brand designed the interiors of The Astera?",
+        "answer": "The interiors of The Astera were designed by Aston Martin. [2]",
+        "model": "nvidia/nemotron-3.5-lightning:free",
+        "finish": "stop",
+        "error": null,
+        "latency_s": 7.91,
+        "sources": [
+          {
+            "title": "DarGlobal Introduces The Astera: Interiors by Aston Martin",
+            "url": "https://darglobal.co.uk/press/dar-global-introduces-stunning-beach-residence-the-astera-interiors-by-aston-martin",
+            "site": "darglobal",
+            "kind": "page",
+            "snapshot_date": "2026-10-31",
+            "n": 1
+          },
+          {
+            "title": "The Astera, Interiors by Aston Martin | Al Marjan Island RAK",
+            "url": "https://darglobal.co.uk/the-astera",
+            "site": "darglobal",
+            "kind": "page",
+            "snapshot_date": "2026-10-31",
+            "n": 2
+          },
+          {
+            "title": "Buy Pagani Penthouses in Dubai UAE | DarGlobal",
+            "url": "https://darglobal.co.uk/one-of-one/project-pagani",
+            "site": "darglobal",
+            "kind": "page",
+            "snapshot_date": "2026-10-31",
+            "n": 3
+          },
+          {
+            "title": "Who sells penthouse apartments designed by supercar brands in the UAE?",
+            "url": "https://darglobal.co.uk/insights/supercar-designed-penthouses-uae",
+            "site": "darglobal",
+            "kind": "page",
+            "snapshot_date": "2026-10-31",
+            "n": 4
+          },
+          {
+            "title": "DarGlobal Awards Main Works Contract for ‘The Astera, Interiors by Aston Martin’ to Gulf Asia Contracting LLC",
+            "url": "https://darglobal.co.uk/press/darglobal-awards-main-contract-astera-aston-martin-gulf-asia",
+            "site": "darglobal",
+            "kind": "page",
+            "snapshot_date": "2026-10-31",
+            "n": 5
+          },
+          {
+            "title": "Aston Martin Residences RAK | DarGlobal Branded Living",
+            "url": "https://darglobal.co.uk/partners/aston-martin",
+            "site": "darglobal",
+            "kind": "page",
+            "snapshot_date": "2026-10-31",
+            "n": 6
+          }
+        ],
+        "grade": {
+          "claims": 1,
+          "supported": 1,
+          "citations_ok": true,
+          "declined": false,
+          "same_language": true,
+          "unsupported": []
+        },
+        "fact_recall": 0.3333333333333333,
+        "answerable": true,
+        "lang": "en"
+      },
+      {
+        "question": "Where is the DG1 tower?",
+        "answer": "The DG1 tower is located directly by the Dubai Canal in the heart of Business Bay, Dubai. [1]",
+        "model": "nvidia/nemotron-3.5-lightning:free",
+        "finish": "stop",
+        "error": null,
+        "latency_s": 3.84,
+        "sources": [
+          {
+            "title": "Apartments in Business Bay, Dubai for Sale - DG1 by DarGlobal",
+            "url": "https://darglobal.co.uk/dg1",
+            "site": "darglobal",
+            "kind": "page",
+            "snapshot_date": "2026-10-31",
+            "n": 1
+          },
+          {
+            "title": "Who builds twisting residential towers in Dubai Business Bay?",
+            "url": "https://darglobal.co.uk/insights/twisting-residential-towers-dubai-business-bay",
+            "site": "darglobal",
+            "kind": "page",
+            "snapshot_date": "2026-10-31",
+            "n": 2
+          },
+          {
+            "title": "apartments-for-sale-in-riyadh",
+            "url": "https://wasalt.sa/en/apartments-for-sale-in-riyadh",
+            "site": "wasalt",
+            "kind": "page",
+            "snapshot_date": "2026-11-01",
+            "n": 3
+          },
+          {
+            "title": "Trump Tower Jeddah | Seafront Residences by DarGlobal",
+            "url": "https://darglobal.co.uk/trump-tower-jeddah",
+            "site": "darglobal",
+            "kind": "page",
+            "snapshot_date": "2026-10-31",
+            "n": 4
+          },
+          {
+            "title": "https://darglobal.co.uk/press/dar-al-arkan-teams-with-pagani-automobili-to-unveil-an-ultra-exclusive-residential-tower-in-dubai",
+            "url": "https://darglobal.co.uk/press/dar-al-arkan-teams-with-pagani-automobili-to-unveil-an-ultra-exclusive-residential-tower-in-dubai",
+            "site": "darglobal",
+            "kind": "page",
+            "snapshot_date": "2026-10-31",
+            "n": 5
+          },
+          {
+            "title": "DarGlobal Partners with Wasalt to Advertise Trump Tower Jeddah in the Kingdom",
+            "url": "https://darglobal.co.uk/press/darglobal-partners-with-wasalt-to-advertise-trump-tower-jeddah",
+            "site": "darglobal",
+            "kind": "page",
+            "snapshot_date": "2026-10-31",
+            "n": 6
+          }
+        ],
+        "grade": {
+          "claims": 1,
+          "supported": 1,
+          "citations_ok": true,
+          "declined": false,
+          "same_language": true,
+          "unsupported": []
+        },
+        "fact_recall": 1.0,
+        "answerable": true,
+        "lang": "en"
+      },
+      {
+        "question": "Tell me about the Da Vinci Tower by Pagani",
+        "answer": "The Da Vinci Tower by Pagani is a luxury residential tower in Downtown Dubai developed by DarGlobal with interiors crafted by Pagani Automobili [2][3]. It features 19 floors above the Dubai Canal, offering 2, 3, and 4-bedroom residences ranging from 77 to 398 sq m [2]. Interiors use carbon fiber and leather inspired by Pagani hypercars like the Zonda and Huayra [4]. A unique suspended “pearl” sphere is central to the design, providing views of Burj Khalifa and the Dubai Fountain [1][2]. The tower is expected to be completed in December 2025 and offers limited units for an exclusive community of Pagani enthusiasts [4][5].",
+        "model": "nvidia/nemotron-3.5-lightning:free",
+        "finish": "stop",
+        "error": null,
+        "latency_s": 7.97,
+        "sources": [
+          {
+            "title": "DarGlobal Awards Shapoorji Pallonji for Da Vinci Tower Fit-Out",
+            "url": "https://darglobal.co.uk/press/dar-global-awards-shapoorji-pallonji-mideast-l-l-c-the-fit-out-works-for-da-vinci-tower-by-pagani-in-dubai-for-116000000-aed",
+            "site": "darglobal",
+            "kind": "page",
+            "snapshot_date": "2026-10-31",
+            "n": 1
+          },
+          {
+            "title": "Da Vinci Tower | Pagani Residences, Dubai | DarGlobal",
+            "url": "https://darglobal.co.uk/davinci-tower-by-pagani",
+            "site": "darglobal",
+            "kind": "page",
+            "snapshot_date": "2026-10-31",
+            "n": 2
+          },
+          {
+            "title": "Pagani Residences | Luxury Residences Dubai by DarGlobal",
+            "url": "https://darglobal.co.uk/partners/pagani",
+            "site": "darglobal",
+            "kind": "page",
+            "snapshot_date": "2026-10-31",
+            "n": 3
+          },
+          {
+            "title": "Which company builds villas with Pagani interiors in Dubai?",
+            "url": "https://darglobal.co.uk/insights/pagani-interiors-villas-dubai",
+            "site": "darglobal",
+            "kind": "page",
+            "snapshot_date": "2026-10-31",
+            "n": 4
+          },
+          {
+            "title": "Utopia Residences | Pagani’s Luxury | DarGlobal",
+            "url": "https://darglobal.co.uk/blog/unveiling-utopia-residences-paganis-automotive-artistry-meets-unparalleled-luxury",
+            "site": "darglobal",
+            "kind": "page",
+            "snapshot_date": "2026-10-31",
+            "n": 5
+          },
+          {
+            "title": "https://darglobal.co.uk/press/dar-al-arkan-teams-with-pagani-automobili-to-unveil-an-ultra-exclusive-residential-tower-in-dubai",
+            "url": "https://darglobal.co.uk/press/dar-al-arkan-teams-with-pagani-automobili-to-unveil-an-ultra-exclusive-residential-tower-in-dubai",
+            "site": "darglobal",
+            "kind": "page",
+            "snapshot_date": "2026-10-31",
+            "n": 6
+          }
+        ],
+        "grade": {
+          "claims": 5,
+          "supported": 5,
+          "citations_ok": true,
+          "declined": false,
+          "same_language": true,
+          "unsupported": []
+        },
+        "fact_recall": 0.5,
+        "answerable": true,
+        "lang": "en"
+      },
+      {
+        "question": "What is AIDA in Oman?",
+        "answer": "AIDA is a large premium mixed-use real estate development in Muscat, Oman, spanning 3.5 million square meters and developed by DarGlobal in joint venture with Omran Group [1][2]. It features luxury mansions, villas, apartments, and high-end hospitality projects such as the 5-star Trump International Oman and Nickelodeon Hotels & Resorts Oman [1][4]. The community is set at clifftops about 130 meters above the sea, blending global luxury styles with local appeal [2]. Owner services and amenities are coordinated through the AIDA 360° concierge platform [6].",
+        "model": "nvidia/nemotron-3.5-lightning:free",
+        "finish": "stop",
+        "error": null,
+        "latency_s": 8.26,
+        "sources": [
+          {
+            "title": "DarGlobal Unveils Nickelodeon Hotels & Resorts at AIDA Oman",
+            "url": "https://darglobal.co.uk/press/darglobal-debuts-nickelodeon-hotels-resorts-oman-in-aida-setting-new-luxury-family-standard",
+            "site": "darglobal",
+            "kind": "page",
+            "snapshot_date": "2026-10-31",
+            "n": 1
+          },
+          {
+            "title": "Spotlight on the Up-and-Coming Luxury Market in Oman",
+            "url": "https://darglobal.co.uk/blog/spotlight-on-up-and-coming-luxury-market-in-oman",
+            "site": "darglobal",
+            "kind": "page",
+            "snapshot_date": "2026-10-31",
+            "n": 2
+          },
+          {
+            "title": "Embrace the Remote Work Lifestyle with AIDA: A Luxurious Oasis for High-Net Remote Workers - DarGlobal",
+            "url": "https://darglobal.co.uk/blog/remote-work-lifestyle-aida",
+            "site": "darglobal",
+            "kind": "page",
+            "snapshot_date": "2026-10-31",
+            "n": 3
+          },
+          {
+            "title": "Dar Global sets a new benchmark in luxury hospitality with the launch of the $500mln Trump International Oman in AIDA",
+            "url": "https://darglobal.co.uk/press/Dar-Global-sets-a-new-benchmark-in-luxury-hospitality-with-the-launch-of-the-500ml-Trump-International-Oman-in-AIDA",
+            "site": "darglobal",
+            "kind": "page",
+            "snapshot_date": "2026-10-31",
+            "n": 4
+          },
+          {
+            "title": "Current Trends in Oman's Real Estate Market",
+            "url": "https://darglobal.co.uk/blog/current-trends-in-omans-real-estate-market-what-investors-need-to-know",
+            "site": "darglobal",
+            "kind": "page",
+            "snapshot_date": "2026-10-31",
+            "n": 5
+          },
+          {
+            "title": "AIDA 360°",
+            "url": "https://darglobal.co.uk/aida-360",
+            "site": "darglobal",
+            "kind": "page",
+            "snapshot_date": "2026-10-31",
+            "n": 6
+          }
+        ],
+        "grade": {
+          "claims": 4,
+          "supported": 4,
+          "citations_ok": true,
+          "declined": false,
+          "same_language": true,
+          "unsupported": []
+        },
+        "fact_recall": 0.5,
+        "answerable": true,
+        "lang": "en"
+      },
+      {
+        "question": "Is Dar Global listed on a stock exchange?",
+        "answer": "Yes, Dar Global is listed on the London Stock Exchange (LSE). It began trading on the LSE on February 28, 2023, and in September 2025 completed a transfer to the Equity Shares (Commercial Companies) category. [3][5]",
+        "model": "nvidia/nemotron-3.5-lightning:free",
+        "finish": "stop",
+        "error": null,
+        "latency_s": 9.44,
+        "sources": [
+          {
+            "title": "Dar al Arkan succeeds in the listing of its international arm, Dar Global on the London stock exchange with a valuation of 2,250,000,000 Saudi Riyals",
+            "url": "https://darglobal.co.uk/press/dar-al-arkan-succeeds-in-the-listing-of-its-international-arm-dar-global-on-the-london-stock-exchange-with-a-valuation-of-2250000000-saudi-riyals",
+            "site": "darglobal",
+            "kind": "page",
+            "snapshot_date": "2026-10-31",
+            "n": 1
+          },
+          {
+            "title": "DarGlobal and Dar Al Arkan: Promoting Dual Listing with the London Stock Exchange - DarGlobal",
+            "url": "https://darglobal.co.uk/blog/darglobal-and-dar-al-arkan-promoting-dual-listing-with-the-london-stock-exchange",
+            "site": "darglobal",
+            "kind": "page",
+            "snapshot_date": "2026-10-31",
+            "n": 2
+          },
+          {
+            "title": "Helping Saudi homegrown brands list in London - DarGlobal",
+            "url": "https://darglobal.co.uk/press/helping-saudi-homegrown-brands-list-in-london",
+            "site": "darglobal",
+            "kind": "page",
+            "snapshot_date": "2026-10-31",
+            "n": 3
+          },
+          {
+            "title": "Which London stock exchange listed developer builds in Dubai?",
+            "url": "https://darglobal.co.uk/insights/lse-listed-developer-dubai",
+            "site": "darglobal",
+            "kind": "page",
+            "snapshot_date": "2026-10-31",
+            "n": 4
+          },
+          {
+            "title": "Dar Global Completes FCA Transfer to Commercial Companies List",
+            "url": "https://darglobal.co.uk/press/darglobal-first-saudi-company-equity-shares-london-stock-exchange",
+            "site": "darglobal",
+            "kind": "page",
+            "snapshot_date": "2026-10-31",
+            "n": 5
+          },
+          {
+            "title": "DarGlobal | International Luxury Real Estate Developer",
+            "url": "https://darglobal.co.uk/partners",
+            "site": "darglobal",
+            "kind": "page",
+            "snapshot_date": "2026-10-31",
+            "n": 6
+          }
+        ],
+        "grade": {
+          "claims": 3,
+          "supported": 2,
+          "citations_ok": false,
+          "declined": false,
+          "same_language": true,
+          "unsupported": [
+            "It began trading on the LSE on February 28, 2023"
+          ]
+        },
+        "fact_recall": 1.0,
+        "answerable": true,
+        "lang": "en"
+      },
+      {
+        "question": "Who is the CEO of Dar Global?",
+        "answer": "Ziad El Chaar is the CEO of Dar Global. [1]",
+        "model": "nvidia/nemotron-3.5-lightning:free",
+        "finish": "stop",
+        "error": null,
+        "latency_s": 5.89,
+        "sources": [
+          {
+            "title": "DarGlobal PLC appoints David Weinreb as Chairman",
+            "url": "https://darglobal.co.uk/press/DarGlobal-PLC-appoints-David-Weinreb-as-Chairman",
+            "site": "darglobal",
+            "kind": "page",
+            "snapshot_date": "2026-10-31",
+            "n": 1
+          },
+          {
+            "title": "Dar Global Achieves $19 Billion Project Milestone, Strengthens Presence in Saudi Arabia",
+            "url": "https://darglobal.co.uk/press/saudi-born-developer-dar-global-expands-project-pipeline-to-19-billion",
+            "site": "darglobal",
+            "kind": "page",
+            "snapshot_date": "2026-10-31",
+            "n": 2
+          },
+          {
+            "title": "Dar Global Completes FCA Transfer to Commercial Companies List",
+            "url": "https://darglobal.co.uk/press/darglobal-first-saudi-company-equity-shares-london-stock-exchange",
+            "site": "darglobal",
+            "kind": "page",
+            "snapshot_date": "2026-10-31",
+            "n": 3
+          },
+          {
+            "title": "LET IT RAIN DIAMONDS: DAR GLOBAL AND MOUAWAD HIGH JEWELLERY HOUSE UNVEIL SAR 880 MILLION LANDMARK RESIDENTIAL PROJECT",
+            "url": "https://darglobal.co.uk/press/LET-IT-RAIN-DIAMONDS-DAR-GLOBAL-AND-MOUAWAD-HIGH-JEWELLERY-HOUSE-UNVEIL-SAR-880-MILLION-LANDMARK-RESIDENTIAL-PROJECT",
+            "site": "darglobal",
+            "kind": "page",
+            "snapshot_date": "2026-10-31",
+            "n": 4
+          },
+          {
+            "title": "Dar al Arkan succeeds in the listing of its international arm, Dar Global on the London stock exchange with a valuation of 2,250,000,000 Saudi Riyals",
+            "url": "https://darglobal.co.uk/press/dar-al-arkan-succeeds-in-the-listing-of-its-international-arm-dar-global-on-the-london-stock-exchange-with-a-valuation-of-2250000000-saudi-riyals",
+            "site": "darglobal",
+            "kind": "page",
+            "snapshot_date": "2026-10-31",
+            "n": 5
+          },
+          {
+            "title": "https://darglobal.co.uk/press/dar-al-arkan-global-launches-sales-of-the-most-premium-residential-address-in-qatar-les-vagues-by-elie-saab-with-views-of-lusail-skyline-and-the-sea-at-qetaifan-island-north",
+            "url": "https://darglobal.co.uk/press/dar-al-arkan-global-launches-sales-of-the-most-premium-residential-address-in-qatar-les-vagues-by-elie-saab-with-views-of-lusail-skyline-and-the-sea-at-qetaifan-island-north",
+            "site": "darglobal",
+            "kind": "page",
+            "snapshot_date": "2026-10-31",
+            "n": 6
+          }
+        ],
+        "grade": {
+          "claims": 1,
+          "supported": 1,
+          "citations_ok": true,
+          "declined": false,
+          "same_language": true,
+          "unsupported": []
+        },
+        "fact_recall": 1.0,
+        "answerable": true,
+        "lang": "en"
+      },
+      {
+        "question": "What projects does Dar Global have in Qatar?",
+        "answer": "Dar Global has two projects in Qatar:  \n- **Les Vagues by ELIE SAAB** at Qetaifan Island North, featuring 70 sea-front residences with interiors designed by Elie Saab [1, 2]  \n- **Trump Villas Simaisma**, a gated golf community with villas starting from QAR 5 million [3]",
+        "model": "nvidia/nemotron-3.5-lightning:free",
+        "finish": "stop",
+        "error": null,
+        "latency_s": 9.16,
+        "sources": [
+          {
+            "title": "https://darglobal.co.uk/press/dar-al-arkan-global-launches-sales-of-the-most-premium-residential-address-in-qatar-les-vagues-by-elie-saab-with-views-of-lusail-skyline-and-the-sea-at-qetaifan-island-north",
+            "url": "https://darglobal.co.uk/press/dar-al-arkan-global-launches-sales-of-the-most-premium-residential-address-in-qatar-les-vagues-by-elie-saab-with-views-of-lusail-skyline-and-the-sea-at-qetaifan-island-north",
+            "site": "darglobal",
+            "kind": "page",
+            "snapshot_date": "2026-10-31",
+            "n": 1
+          },
+          {
+            "title": "https://darglobal.co.uk/press/dar-al-arkan-and-qetaifan-projects-unveil-premium-sea-front-residences-with-interiors-designed-by-elie-saab-in-qetaifan-island-north-qatar",
+            "url": "https://darglobal.co.uk/press/dar-al-arkan-and-qetaifan-projects-unveil-premium-sea-front-residences-with-interiors-designed-by-elie-saab-in-qetaifan-island-north-qatar",
+            "site": "darglobal",
+            "kind": "page",
+            "snapshot_date": "2026-10-31",
+            "n": 2
+          },
+          {
+            "title": "Dar Global Opens Sales for Trump Villas Simaisma, Qatar with Unprecedented Interest",
+            "url": "https://darglobal.co.uk/press/dar-global-opens-sales-trump-villas-simaisma-qatar-unprecedented-interest",
+            "site": "darglobal",
+            "kind": "page",
+            "snapshot_date": "2026-10-31",
+            "n": 3
+          },
+          {
+            "title": "Qatar’s Luxurious Investment Oasis | DarGlobal",
+            "url": "https://darglobal.co.uk/blog/unveiling-qatars-luxurious-investment-oasis-your-gateway-to-opulence",
+            "site": "darglobal",
+            "kind": "page",
+            "snapshot_date": "2026-10-31",
+            "n": 4
+          },
+          {
+            "title": "https://darglobal.co.uk/press/dar-al-arkan-and-qetaifan-projects-unveil-premium-sea-front-residences-with-interiors-designed-by-elie-saab-at-expo-2020-dubai",
+            "url": "https://darglobal.co.uk/press/dar-al-arkan-and-qetaifan-projects-unveil-premium-sea-front-residences-with-interiors-designed-by-elie-saab-at-expo-2020-dubai",
+            "site": "darglobal",
+            "kind": "page",
+            "snapshot_date": "2026-10-31",
+            "n": 5
+          },
+          {
+            "title": "https://darglobal.co.uk/blog/qatars-vision-2030-opportunities-and-advantages-for-real-estate-investor",
+            "url": "https://darglobal.co.uk/blog/qatars-vision-2030-opportunities-and-advantages-for-real-estate-investor",
+            "site": "darglobal",
+            "kind": "page",
+            "snapshot_date": "2026-10-31",
+            "n": 6
+          }
+        ],
+        "grade": {
+          "claims": 2,
+          "supported": 2,
+          "citations_ok": true,
+          "declined": false,
+          "same_language": true,
+          "unsupported": []
+        },
+        "fact_recall": 1.0,
+        "answerable": true,
+        "lang": "en"
+      },
+      {
+        "question": "What is Les Vagues by Elie Saab?",
+        "answer": "Les Vagues by Elie Saab is a branded seafront residential complex on Qetaifan Island North in Doha, developed by DarGlobal [2]. It features 1-, 2-, and 3-bedroom residences (approximately 84–383 sqm) with Elie Saab-designed interiors in cream and grey tones, using marble, bronze, and premium stone finishes [2]. The development also includes private beaches, a marina, a water park, and an 18-hole golf course [2]. It is DarGlobal’s first branded residential project in Qatar with interiors by Elie Saab, representing a fusion of haute couture and luxury real estate [1][3].",
+        "model": "nvidia/nemotron-3.5-lightning:free",
+        "finish": "stop",
+        "error": null,
+        "latency_s": 13.28,
+        "sources": [
+          {
+            "title": "Les Vagues by Elie Saab | Luxury Residences",
+            "url": "https://darglobal.co.uk/blog/les-vagues-where-couture-meets-comfort-elie-saabs-visionary-real-estate-venture-in-qatar-ues-elie-saabs-visionary-real-estate-venture-in-qatar",
+            "site": "darglobal",
+            "kind": "page",
+            "snapshot_date": "2026-10-31",
+            "n": 1
+          },
+          {
+            "title": "Les Vagues by Elie Saab | Sea-View Residences Doha",
+            "url": "https://darglobal.co.uk/les-vagues",
+            "site": "darglobal",
+            "kind": "page",
+            "snapshot_date": "2026-10-31",
+            "n": 2
+          },
+          {
+            "title": "Qatar’s Luxurious Investment Oasis | DarGlobal",
+            "url": "https://darglobal.co.uk/blog/unveiling-qatars-luxurious-investment-oasis-your-gateway-to-opulence",
+            "site": "darglobal",
+            "kind": "page",
+            "snapshot_date": "2026-10-31",
+            "n": 3
+          },
+          {
+            "title": "Elie Saab Residences Qatar | DarGlobal Branded Living",
+            "url": "https://darglobal.co.uk/partners/elie-saab",
+            "site": "darglobal",
+            "kind": "page",
+            "snapshot_date": "2026-10-31",
+            "n": 4
+          },
+          {
+            "title": "https://darglobal.co.uk/blog/runway-residences-fashion-brands-redefining-luxury-living-elie-saab-missoni-and-dg",
+            "url": "https://darglobal.co.uk/blog/runway-residences-fashion-brands-redefining-luxury-living-elie-saab-missoni-and-dg",
+            "site": "darglobal",
+            "kind": "page",
+            "snapshot_date": "2026-10-31",
+            "n": 5
+          },
+          {
+            "title": "Benahavis | Costa del Sol's Gem of Luxury & Beauty | DarGlobal",
+            "url": "https://darglobal.co.uk/blog/benahavis-luxury-villas-and-prime-real-estate-discover-your-perfect-investment-destination",
+            "site": "darglobal",
+            "kind": "page",
+            "snapshot_date": "2026-10-31",
+            "n": 6
+          }
+        ],
+        "grade": {
+          "claims": 4,
+          "supported": 4,
+          "citations_ok": true,
+          "declined": false,
+          "same_language": true,
+          "unsupported": []
+        },
+        "fact_recall": 1.0,
+        "answerable": true,
+        "lang": "en"
+      },
+      {
+        "question": "Tell me about Trump Tower Jeddah",
+        "answer": "Trump Tower Jeddah is a 47-story luxury residential tower on Jeddah’s Red Sea Corniche, developed by DarGlobal under a licensing agreement with the Trump Organization. It features the Kingdom’s first Trump Club members-only social club, offering fine dining, a cigar lounge, gym, pool, jacuzzi, and 24/7 concierge. The project is valued at SAR 2 billion ($531 million) and provides uninterrupted Red Sea views. Saudi tax benefits include 0% income tax and capital gains tax, with premium residency eligibility for investments of 4 million SAR or more. [1][2][3][4][5]",
+        "model": "nvidia/nemotron-3.5-lightning:free",
+        "finish": "stop",
+        "error": null,
+        "latency_s": 12.32,
+        "sources": [
+          {
+            "title": "DarGlobal Partners with Wasalt to Advertise Trump Tower Jeddah in the Kingdom",
+            "url": "https://darglobal.co.uk/press/darglobal-partners-with-wasalt-to-advertise-trump-tower-jeddah",
+            "site": "darglobal",
+            "kind": "page",
+            "snapshot_date": "2026-10-31",
+            "n": 1
+          },
+          {
+            "title": "Trump Tower Jeddah | Seafront Residences by DarGlobal",
+            "url": "https://darglobal.co.uk/trump-tower-jeddah",
+            "site": "darglobal",
+            "kind": "page",
+            "snapshot_date": "2026-10-31",
+            "n": 2
+          },
+          {
+            "title": "DAR GLOBAL BREAKS GROUND ON TRUMP TOWER JEDDAH, APPOINTS SIFCO FOR ENABLING WORKS",
+            "url": "https://darglobal.co.uk/press/darglobal-breaks-ground-on-trump-tower-jeddah",
+            "site": "darglobal",
+            "kind": "page",
+            "snapshot_date": "2026-10-31",
+            "n": 3
+          },
+          {
+            "title": "Dar Global and The Trump Organization Expand Collaboration with the Launch of SAR 2 Billion Trump Tower to Transform Jeddah's Skyline",
+            "url": "https://darglobal.co.uk/press/Dar-Global-and-The-Trump-Organization-Expand-Collaboration-with-the-Launch-of-SAR-2-Billion-Trump-Tower-to-Tranform-Jeddah-Skyline",
+            "site": "darglobal",
+            "kind": "page",
+            "snapshot_date": "2026-10-31",
+            "n": 4
+          },
+          {
+            "title": "DarGlobal Awards ACC Main Works Contract for Trump Tower Jeddah as Enabling & Foundation Works Conclude",
+            "url": "https://darglobal.co.uk/press/darglobal-appoints-acc-for-main-works-as-trump-tower-jeddah-rises",
+            "site": "darglobal",
+            "kind": "page",
+            "snapshot_date": "2026-10-31",
+            "n": 5
+          },
+          {
+            "title": "villas-for-rent-in-jeddah",
+            "url": "https://wasalt.sa/en/villas-for-rent-in-jeddah",
+            "site": "wasalt",
+            "kind": "page",
+            "snapshot_date": "2026-11-01",
+            "n": 6
+          }
+        ],
+        "grade": {
+          "claims": 8,
+          "supported": 8,
+          "citations_ok": true,
+          "declined": false,
+          "same_language": true,
+          "unsupported": []
+        },
+        "fact_recall": 0.5,
+        "answerable": true,
+        "lang": "en"
+      },
+      {
+        "question": "What is the Rayana community?",
+        "answer": "Rayana is a low-density residential enclave in Wadi Safar, Diriyah, developed by DarGlobal as one of Saudi Arabia's most prestigious destinations [1]. It features luxury residences such as Rayana Mansions and Trump-branded Mansions, along with a championship golf course, members-only clubhouse, parks, and other community amenities [4]. The development is supported by a SAR 338 million design-and-build infrastructure contract covering earthworks, roads, and utility networks [1]. All details reflect the website snapshot from 2026-10-31.",
+        "model": "nvidia/nemotron-3.5-lightning:free",
+        "finish": "stop",
+        "error": null,
+        "latency_s": 10.78,
+        "sources": [
+          {
+            "title": "DarGlobal Awards SAR 338 Million Rayana Infrastructure Contract in Wadi Safar, Diriyah",
+            "url": "https://darglobal.co.uk/press/dar-global-awards-sar-338-million-rayana-master-community-infrastructure-contract-compass-bin-omairah-wadi-safar-diriyah-riyadh",
+            "site": "darglobal",
+            "kind": "page",
+            "snapshot_date": "2026-10-31",
+            "n": 1
+          },
+          {
+            "title": "DarGlobal starts work on SIDRA, the largest master development in Bosnia and the Balkans",
+            "url": "https://darglobal.co.uk/press/dar-al-arkan-starts-work-on-sidra-the-largest-master-development-in-bosnia-and-the-balkans",
+            "site": "darglobal",
+            "kind": "page",
+            "snapshot_date": "2026-10-31",
+            "n": 2
+          },
+          {
+            "title": "Amaya",
+            "url": "https://darglobal.co.uk/amaya/amaya-plots",
+            "site": "darglobal",
+            "kind": "page",
+            "snapshot_date": "2026-10-31",
+            "n": 3
+          },
+          {
+            "title": "Trump Mansions",
+            "url": "https://darglobal.co.uk/rayana/trump-mansions",
+            "site": "darglobal",
+            "kind": "page",
+            "snapshot_date": "2026-10-31",
+            "n": 4
+          },
+          {
+            "title": "DarGlobal | International Luxury Real Estate Developer",
+            "url": "https://darglobal.co.uk",
+            "site": "darglobal",
+            "kind": "page",
+            "snapshot_date": "2026-10-31",
+            "n": 5
+          },
+          {
+            "title": "Invest in Luxury and Nature: Discover the Beauty of Bosnia and Herzegovina with SIDRA - DarGlobal",
+            "url": "https://darglobal.co.uk/blog/invest-in-luxury-and-nature-discover-the-beauty-of-bosnia-and-herzegovina-with-sidra",
+            "site": "darglobal",
+            "kind": "page",
+            "snapshot_date": "2026-10-31",
+            "n": 6
+          }
+        ],
+        "grade": {
+          "claims": 6,
+          "supported": 6,
+          "citations_ok": false,
+          "declined": false,
+          "same_language": true,
+          "unsupported": []
+        },
+        "fact_recall": 0.5,
+        "answerable": true,
+        "lang": "en"
+      },
+      {
+        "question": "Can I invest in Dar Global property with crypto or tokens?",
+        "answer": "",
+        "model": null,
+        "finish": null,
+        "error": "None: timeout: TimeoutError()",
+        "latency_s": 50.0,
+        "sources": [
+          {
+            "title": "Buy Property with Crypto",
+            "url": "https://darglobal.co.uk/Invest-crypto",
+            "site": "darglobal",
+            "kind": "page",
+            "snapshot_date": "2026-10-31",
+            "n": 1
+          },
+          {
+            "title": "DarGlobal | Tokenization",
+            "url": "https://darglobal.co.uk/tokenization",
+            "site": "darglobal",
+            "kind": "page",
+            "snapshot_date": "2026-10-31",
+            "n": 2
+          },
+          {
+            "title": "Which luxury developer allows cryptocurrency payments or tokenized investment?",
+            "url": "https://darglobal.co.uk/insights/crypto-tokenized-luxury-developer",
+            "site": "darglobal",
+            "kind": "page",
+            "snapshot_date": "2026-10-31",
+            "n": 3
+          },
+          {
+            "title": "Dar al Arkan succeeds in the listing of its international arm, Dar Global on the London stock exchange with a valuation of 2,250,000,000 Saudi Riyals",
+            "url": "https://darglobal.co.uk/press/dar-al-arkan-succeeds-in-the-listing-of-its-international-arm-dar-global-on-the-london-stock-exchange-with-a-valuation-of-2250000000-saudi-riyals",
+            "site": "darglobal",
+            "kind": "page",
+            "snapshot_date": "2026-10-31",
+            "n": 4
+          },
+          {
+            "title": "Dar Global Capital Partners Targets High-Value Real Estate Opportunities in Dubai Across Global Investment Mandate",
+            "url": "https://darglobal.co.uk/press/dar-global-capital-partners-targets-high-value-real-estate-opportunities-dubai",
+            "site": "darglobal",
+            "kind": "page",
+            "snapshot_date": "2026-10-31",
+            "n": 5
+          },
+          {
+            "title": "Who offers tokenized fractional ownership of luxury hotels in the Middle East?",
+            "url": "https://darglobal.co.uk/insights/tokenized-fractional-luxury-hotels-me",
+            "site": "darglobal",
+            "kind": "page",
+            "snapshot_date": "2026-10-31",
+            "n": 6
+          }
+        ],
+        "grade": null,
+        "answerable": true,
+        "lang": "en"
+      },
+      {
+        "question": "How can I become a broker or agent with Dar Global?",
+        "answer": "",
+        "model": null,
+        "finish": null,
+        "error": "None: timeout: TimeoutError()",
+        "latency_s": 50.0,
+        "sources": [
+          {
+            "title": "DarGlobal Awards Top Agents Propelling Dubai's Real Estate Sector",
+            "url": "https://darglobal.co.uk/press/darglobal-awards-top-agents-propelling-real-estate-sector-in-dubai",
+            "site": "darglobal",
+            "kind": "page",
+            "snapshot_date": "2026-10-31",
+            "n": 1
+          },
+          {
+            "title": "DarGlobal's Agents Event Debuts in Spanish Real Estate",
+            "url": "https://darglobal.co.uk/press/dar-globals-agents-event-paves-the-way-for-a-spectacular-debut-in-spanish-real-estate",
+            "site": "darglobal",
+            "kind": "page",
+            "snapshot_date": "2026-10-31",
+            "n": 2
+          },
+          {
+            "title": "Dar Global Capital Partners Targets High-Value Real Estate Opportunities in Dubai Across Global Investment Mandate",
+            "url": "https://darglobal.co.uk/press/dar-global-capital-partners-targets-high-value-real-estate-opportunities-dubai",
+            "site": "darglobal",
+            "kind": "page",
+            "snapshot_date": "2026-10-31",
+            "n": 3
+          },
+          {
+            "title": "",
+            "url": "https://wasalt.sa/en/s/terms-of-use",
+            "site": "wasalt",
+            "kind": "page",
+            "snapshot_date": "2026-11-01",
+            "n": 4
+          },
+          {
+            "title": "Join DarGlobal | Luxury Real Estate",
+            "url": "https://darglobal.co.uk/become-a-broker",
+            "site": "darglobal",
+            "kind": "page",
+            "snapshot_date": "2026-10-31",
+            "n": 5
+          },
+          {
+            "title": "FAQ - Frequently Asked Questions | Darglobal",
+            "url": "https://darglobal.co.uk/faq",
+            "site": "darglobal",
+            "kind": "page",
+            "snapshot_date": "2026-10-31",
+            "n": 6
+          }
+        ],
+        "grade": null,
+        "answerable": true,
+        "lang": "en"
+      },
+      {
+        "question": "What are the benefits of buying property in Dubai?",
+        "answer": "",
+        "model": null,
+        "finish": null,
+        "error": "None: timeout: TimeoutError()",
+        "latency_s": 50.0,
+        "sources": [
+          {
+            "title": "Buy Modern Apartments & Exclusive Villas | International Homes for Sale",
+            "url": "https://darglobal.co.uk/projects/properties-in-uae",
+            "site": "darglobal",
+            "kind": "page",
+            "snapshot_date": "2026-10-31",
+            "n": 1
+          },
+          {
+            "title": "Buy Modern Apartments & Exclusive Villas | International Homes for Sale",
+            "url": "https://darglobal.co.uk/projects/properties-in-uae/villas",
+            "site": "darglobal",
+            "kind": "page",
+            "snapshot_date": "2026-10-31",
+            "n": 2
+          },
+          {
+            "title": "Luxury Living and Smart Investments: Exploring Dubai's Real Estate Landscape - DarGlobal",
+            "url": "https://darglobal.co.uk/blog/luxury-living-and-smart-investments-exploring-dubais-real-estate-landscape",
+            "site": "darglobal",
+            "kind": "page",
+            "snapshot_date": "2026-10-31",
+            "n": 3
+          },
+          {
+            "title": "Buy Modern Apartments & Exclusive Villas | International Homes for Sale",
+            "url": "https://darglobal.co.uk/projects/properties-in-oman",
+            "site": "darglobal",
+            "kind": "page",
+            "snapshot_date": "2026-10-31",
+            "n": 4
+          },
+          {
+            "title": "apartments-for-sale-in-riyadh",
+            "url": "https://wasalt.sa/en/apartments-for-sale-in-riyadh",
+            "site": "wasalt",
+            "kind": "page",
+            "snapshot_date": "2026-11-01",
+            "n": 5
+          },
+          {
+            "title": "Dar Global Capital Partners Targets High-Value Real Estate Opportunities in Dubai Across Global Investment Mandate",
+            "url": "https://darglobal.co.uk/press/dar-global-capital-partners-targets-high-value-real-estate-opportunities-dubai",
+            "site": "darglobal",
+            "kind": "page",
+            "snapshot_date": "2026-10-31",
+            "n": 6
+          }
+        ],
+        "grade": null,
+        "answerable": true,
+        "lang": "en"
+      },
+      {
+        "question": "What villas does Dar Global sell in Spain?",
+        "answer": "Dar Global sells villas in Spain located in Benahavís, Marbella, and Estepona. These include 4, 5, and 6-bedroom villas with built-up spaces of 700 to 1,450 sqm [3]. A notable offering is the Lamborghini‑branded villas at Tierra Viva in Benahavis, starting at £3.1 million [1]. Additional features listed include Golden Visa eligibility for non‑EU buyers, Mediterranean climate year‑round, strong rental demand, and transparent legal procedures for overseas investors [3].",
+        "model": "nvidia/nemotron-3.5-lightning:free",
+        "finish": "stop",
+        "error": null,
+        "latency_s": 25.08,
+        "sources": [
+          {
+            "title": "Missoni and DarGlobal Launch Project in Southern Spain",
+            "url": "https://darglobal.co.uk/press/missoni-and-dar-global-launch-residential-development-project-in-southern-spain-duplicate-27740",
+            "site": "darglobal",
+            "kind": "page",
+            "snapshot_date": "2026-10-31",
+            "n": 1
+          },
+          {
+            "title": "Buy Modern Apartments & Exclusive Villas | International Homes for Sale",
+            "url": "https://darglobal.co.uk/projects/properties-in-spain",
+            "site": "darglobal",
+            "kind": "page",
+            "snapshot_date": "2026-10-31",
+            "n": 2
+          },
+          {
+            "title": "Buy Modern Apartments & Exclusive Villas | International Homes for Sale",
+            "url": "https://darglobal.co.uk/projects/properties-in-spain/villas",
+            "site": "darglobal",
+            "kind": "page",
+            "snapshot_date": "2026-10-31",
+            "n": 3
+          },
+          {
+            "title": "Missoni and DarGlobal Launch Project in Southern Spain",
+            "url": "https://darglobal.co.uk/press/missoni-and-dar-global-launch-residential-development-project-in-southern-spain",
+            "site": "darglobal",
+            "kind": "page",
+            "snapshot_date": "2026-10-31",
+            "n": 4
+          },
+          {
+            "title": "Who sells luxury second homes that come with residency in Saudi Arabia?",
+            "url": "https://darglobal.co.uk/insights/luxury-second-homes-saudi-residency",
+            "site": "darglobal",
+            "kind": "page",
+            "snapshot_date": "2026-10-31",
+            "n": 5
+          },
+          {
+            "title": "DarGlobal's Agents Event Debuts in Spanish Real Estate",
+            "url": "https://darglobal.co.uk/press/dar-globals-agents-event-paves-the-way-for-a-spectacular-debut-in-spanish-real-estate",
+            "site": "darglobal",
+            "kind": "page",
+            "snapshot_date": "2026-10-31",
+            "n": 6
+          }
+        ],
+        "grade": {
+          "claims": 4,
+          "supported": 4,
+          "citations_ok": true,
+          "declined": false,
+          "same_language": true,
+          "unsupported": []
+        },
+        "fact_recall": null,
+        "answerable": true,
+        "lang": "en"
+      },
+      {
+        "question": "What is Urban Oasis by Missoni?",
+        "answer": "Urban Oasis by Missoni is a completed, sold-out branded residential tower on Dubai Canal, developed by DarGlobal with interior design by the Italian fashion house Missoni. It spans 38 floors offering one-, two-, and three-bedroom apartments plus four-bedroom penthouses, and was valued at AED 800 million. [1][4]",
+        "model": "nvidia/nemotron-3.5-lightning:free",
+        "finish": "stop",
+        "error": null,
+        "latency_s": 26.81,
+        "sources": [
+          {
+            "title": "Urban Oasis by Missoni | Branded Dubai Canal Tower",
+            "url": "https://darglobal.co.uk/urban-oasis-by-missoni",
+            "site": "darglobal",
+            "kind": "page",
+            "snapshot_date": "2026-10-31",
+            "n": 1
+          },
+          {
+            "title": "DarGlobal tops out its Urban Oasis by Missoni residential tower in Dubai at 34 stories",
+            "url": "https://darglobal.co.uk/press/dar-al-arkan-tops-out-its-urban-oasis-by-missoni-residential-tower-in-dubai-at-34-stories",
+            "site": "darglobal",
+            "kind": "page",
+            "snapshot_date": "2026-10-31",
+            "n": 2
+          },
+          {
+            "title": "DarGlobal teams with Missoni to deliver the exclusive Urban Oasis water-front residential tower in Dubai",
+            "url": "https://darglobal.co.uk/press/dar-al-arkan-teams-with-missoni-to-deliver-the-exclusive-urban-oasis-water-front-residential-tower-in-dubai",
+            "site": "darglobal",
+            "kind": "page",
+            "snapshot_date": "2026-10-31",
+            "n": 3
+          },
+          {
+            "title": "Missoni Residences Dubai & Spain | DarGlobal",
+            "url": "https://darglobal.co.uk/partners/missoni",
+            "site": "darglobal",
+            "kind": "page",
+            "snapshot_date": "2026-10-31",
+            "n": 4
+          },
+          {
+            "title": "Luxury Living and Smart Investments: Exploring Dubai's Real Estate Landscape - DarGlobal",
+            "url": "https://darglobal.co.uk/blog/luxury-living-and-smart-investments-exploring-dubais-real-estate-landscape",
+            "site": "darglobal",
+            "kind": "page",
+            "snapshot_date": "2026-10-31",
+            "n": 5
+          },
+          {
+            "title": "https://darglobal.co.uk/blog/runway-residences-fashion-brands-redefining-luxury-living-elie-saab-missoni-and-dg",
+            "url": "https://darglobal.co.uk/blog/runway-residences-fashion-brands-redefining-luxury-living-elie-saab-missoni-and-dg",
+            "site": "darglobal",
+            "kind": "page",
+            "snapshot_date": "2026-10-31",
+            "n": 6
+          }
+        ],
+        "grade": {
+          "claims": 6,
+          "supported": 6,
+          "citations_ok": true,
+          "declined": false,
+          "same_language": true,
+          "unsupported": []
+        },
+        "fact_recall": 1.0,
+        "answerable": true,
+        "lang": "en"
+      },
+      {
+        "question": "How do I contact Dar Global?",
+        "answer": "The documents I have access to don't include specific contact details like phone numbers, email addresses, or physical offices for Dar Global. For the most current ways to reach them—such as global office locations, advisor contact forms, or sales centres—please visit Dar Global's official website at www.darglobal.co.uk.",
+        "model": "nvidia/nemotron-3.5-lightning:free",
+        "finish": "stop",
+        "error": null,
+        "latency_s": 13.93,
+        "sources": [
+          {
+            "title": "Terms and Conditions - DarGlobal",
+            "url": "https://darglobal.co.uk/terms-conditions",
+            "site": "darglobal",
+            "kind": "page",
+            "snapshot_date": "2026-10-31",
+            "n": 1
+          },
+          {
+            "title": "FAQ - Frequently Asked Questions | Darglobal",
+            "url": "https://darglobal.co.uk/faq",
+            "site": "darglobal",
+            "kind": "page",
+            "snapshot_date": "2026-10-31",
+            "n": 2
+          },
+          {
+            "title": "DarGlobal PLC appoints David Weinreb as Chairman",
+            "url": "https://darglobal.co.uk/press/DarGlobal-PLC-appoints-David-Weinreb-as-Chairman",
+            "site": "darglobal",
+            "kind": "page",
+            "snapshot_date": "2026-10-31",
+            "n": 3
+          },
+          {
+            "title": "DarGlobal Blog | Insights on Luxury Real Estate, Investments",
+            "url": "https://darglobal.co.uk/blog",
+            "site": "darglobal",
+            "kind": "page",
+            "snapshot_date": "2026-10-31",
+            "n": 4
+          },
+          {
+            "title": "Amaya",
+            "url": "https://darglobal.co.uk/amaya/amaya-plots",
+            "site": "darglobal",
+            "kind": "page",
+            "snapshot_date": "2026-10-31",
+            "n": 5
+          },
+          {
+            "title": "Tierra Viva: An Example of How the Automotive Industry is Shaping Luxury Real-Estate - DarGlobal",
+            "url": "https://darglobal.co.uk/blog/tierra-viva-an-example-of-how-the-automotive-industry-is-shaping-luxury-real-estate",
+            "site": "darglobal",
+            "kind": "page",
+            "snapshot_date": "2026-10-31",
+            "n": 6
+          }
+        ],
+        "grade": {
+          "claims": 1,
+          "supported": 1,
+          "citations_ok": false,
+          "declined": true,
+          "same_language": true,
+          "unsupported": []
+        },
+        "fact_recall": null,
+        "answerable": true,
+        "lang": "en"
+      },
+      {
+        "question": "When was Wasalt launched?",
+        "answer": "Wasalt was launched in January 2022. [1]",
+        "model": "nvidia/nemotron-3.5-lightning:free",
+        "finish": "stop",
+        "error": null,
+        "latency_s": 12.21,
+        "sources": [
+          {
+            "title": "",
+            "url": "https://wasalt.sa/en/corporate",
+            "site": "wasalt",
+            "kind": "page",
+            "snapshot_date": "2026-10-31",
+            "n": 1
+          },
+          {
+            "title": "properties-for-sale-in-dammam",
+            "url": "https://wasalt.sa/en/properties-for-sale-in-dammam",
+            "site": "wasalt",
+            "kind": "page",
+            "snapshot_date": "2026-11-01",
+            "n": 2
+          },
+          {
+            "title": "DarGlobal Partners with Wasalt to Advertise Trump Tower Jeddah in the Kingdom",
+            "url": "https://darglobal.co.uk/press/darglobal-partners-with-wasalt-to-advertise-trump-tower-jeddah",
+            "site": "darglobal",
+            "kind": "page",
+            "snapshot_date": "2026-10-31",
+            "n": 3
+          },
+          {
+            "title": "",
+            "url": "https://wasalt.sa/en",
+            "site": "wasalt",
+            "kind": "page",
+            "snapshot_date": "2026-11-01",
+            "n": 4
+          },
+          {
+            "title": "",
+            "url": "https://wasalt.sa/en/s/privacy-policy",
+            "site": "wasalt",
+            "kind": "page",
+            "snapshot_date": "2026-11-01",
+            "n": 5
+          },
+          {
+            "title": "Missoni and DarGlobal Launch Project in Southern Spain",
+            "url": "https://darglobal.co.uk/press/missoni-and-dar-global-launch-residential-development-project-in-southern-spain",
+            "site": "darglobal",
+            "kind": "page",
+            "snapshot_date": "2026-10-31",
+            "n": 6
+          }
+        ],
+        "grade": {
+          "claims": 1,
+          "supported": 1,
+          "citations_ok": true,
+          "declined": false,
+          "same_language": true,
+          "unsupported": []
+        },
+        "fact_recall": 1.0,
+        "answerable": true,
+        "lang": "en"
+      },
+      {
+        "question": "What is Wasalt Business?",
+        "answer": "Wasalt Business is described as the first real estate app in Saudi Arabia, designed for brokers to manage tasks, listings, leads, and teams [1]. It has crossed 15,000 registered brokers [1].",
+        "model": "nvidia/nemotron-3.5-lightning:free",
+        "finish": "stop",
+        "error": null,
+        "latency_s": 7.38,
+        "sources": [
+          {
+            "title": "",
+            "url": "https://wasalt.sa/en/corporate",
+            "site": "wasalt",
+            "kind": "page",
+            "snapshot_date": "2026-10-31",
+            "n": 1
+          },
+          {
+            "title": "",
+            "url": "https://wasalt.sa/en/s/privacy-policy",
+            "site": "wasalt",
+            "kind": "page",
+            "snapshot_date": "2026-11-01",
+            "n": 2
+          },
+          {
+            "title": "properties-for-sale-in-dammam",
+            "url": "https://wasalt.sa/en/properties-for-sale-in-dammam",
+            "site": "wasalt",
+            "kind": "page",
+            "snapshot_date": "2026-11-01",
+            "n": 3
+          },
+          {
+            "title": "",
+            "url": "https://wasalt.sa/en",
+            "site": "wasalt",
+            "kind": "page",
+            "snapshot_date": "2026-11-01",
+            "n": 4
+          },
+          {
+            "title": "Apartments in Business Bay, Dubai for Sale - DG1 by DarGlobal",
+            "url": "https://darglobal.co.uk/dg1",
+            "site": "darglobal",
+            "kind": "page",
+            "snapshot_date": "2026-10-31",
+            "n": 5
+          },
+          {
+            "title": "",
+            "url": "https://wasalt.sa/en/s/terms-of-use",
+            "site": "wasalt",
+            "kind": "page",
+            "snapshot_date": "2026-11-01",
+            "n": 6
+          }
+        ],
+        "grade": {
+          "claims": 2,
+          "supported": 2,
+          "citations_ok": true,
+          "declined": false,
+          "same_language": true,
+          "unsupported": []
+        },
+        "fact_recall": 0.0,
+        "answerable": true,
+        "lang": "en"
+      },
+      {
+        "question": "Does Wasalt run property auctions?",
+        "answer": "Yes, Wasalt runs property auctions. According to their corporate page [1], they launched \"Wasalt Auction\" and are \"licensed by Infath as a licensed real estate auction platform,\" and they have \"launched movable assets on Wasalt Auctions.\" Their ecosystem also includes auctions as mentioned in the DarGlobal partnership announcement [6].",
+        "model": "nvidia/nemotron-3.5-lightning:free",
+        "finish": "stop",
+        "error": null,
+        "latency_s": 2.08,
+        "sources": [
+          {
+            "title": "",
+            "url": "https://wasalt.sa/en/corporate",
+            "site": "wasalt",
+            "kind": "page",
+            "snapshot_date": "2026-10-31",
+            "n": 1
+          },
+          {
+            "title": "properties-for-sale-in-dammam",
+            "url": "https://wasalt.sa/en/properties-for-sale-in-dammam",
+            "site": "wasalt",
+            "kind": "page",
+            "snapshot_date": "2026-11-01",
+            "n": 2
+          },
+          {
+            "title": "",
+            "url": "https://wasalt.sa/en/s/privacy-policy",
+            "site": "wasalt",
+            "kind": "page",
+            "snapshot_date": "2026-11-01",
+            "n": 3
+          },
+          {
+            "title": "",
+            "url": "https://wasalt.sa/en",
+            "site": "wasalt",
+            "kind": "page",
+            "snapshot_date": "2026-11-01",
+            "n": 4
+          },
+          {
+            "title": "apartments-for-sale-in-makkah",
+            "url": "https://wasalt.sa/en/apartments-for-sale-in-makkah",
+            "site": "wasalt",
+            "kind": "page",
+            "snapshot_date": "2026-11-01",
+            "n": 5
+          },
+          {
+            "title": "DarGlobal Partners with Wasalt to Advertise Trump Tower Jeddah in the Kingdom",
+            "url": "https://darglobal.co.uk/press/darglobal-partners-with-wasalt-to-advertise-trump-tower-jeddah",
+            "site": "darglobal",
+            "kind": "page",
+            "snapshot_date": "2026-10-31",
+            "n": 6
+          }
+        ],
+        "grade": {
+          "claims": 5,
+          "supported": 5,
+          "citations_ok": true,
+          "declined": false,
+          "same_language": true,
+          "unsupported": []
+        },
+        "fact_recall": 1.0,
+        "answerable": true,
+        "lang": "en"
+      },
+      {
+        "question": "What are Wasalt's terms of use?",
+        "answer": "Wasalt's Terms of Use [1] state that the website is owned by Wasalt Real Estate Services Company, which acts as a real estate broker for residential and commercial properties in the Kingdom of Saudi Arabia and worldwide. By logging in or using the website, users acknowledge and agree to the Terms of Use and the Privacy Policy as legal documents outlining their rights and obligations. The Terms do not affect or supersede any other agreement the Company has. The \"Website\" is defined as www.wasalt.sa, the mobile application, and pages on social media platforms.",
+        "model": "nvidia/nemotron-3.5-lightning:free",
+        "finish": "stop",
+        "error": null,
+        "latency_s": 8.12,
+        "sources": [
+          {
+            "title": "",
+            "url": "https://wasalt.sa/en/s/terms-of-use",
+            "site": "wasalt",
+            "kind": "page",
+            "snapshot_date": "2026-11-01",
+            "n": 1
+          },
+          {
+            "title": "Terms of Uses - DarGlobal",
+            "url": "https://darglobal.co.uk/terms-of-uses",
+            "site": "darglobal",
+            "kind": "page",
+            "snapshot_date": "2026-10-31",
+            "n": 2
+          },
+          {
+            "title": "",
+            "url": "https://wasalt.sa/en/s/privacy-policy",
+            "site": "wasalt",
+            "kind": "page",
+            "snapshot_date": "2026-11-01",
+            "n": 3
+          },
+          {
+            "title": "properties-for-sale-in-dammam",
+            "url": "https://wasalt.sa/en/properties-for-sale-in-dammam",
+            "site": "wasalt",
+            "kind": "page",
+            "snapshot_date": "2026-11-01",
+            "n": 4
+          },
+          {
+            "title": "",
+            "url": "https://wasalt.sa/en",
+            "site": "wasalt",
+            "kind": "page",
+            "snapshot_date": "2026-11-01",
+            "n": 5
+          },
+          {
+            "title": "Terms and Conditions - DarGlobal",
+            "url": "https://darglobal.co.uk/terms-conditions",
+            "site": "darglobal",
+            "kind": "page",
+            "snapshot_date": "2026-10-31",
+            "n": 6
+          }
+        ],
+        "grade": {
+          "claims": 4,
+          "supported": 4,
+          "citations_ok": true,
+          "declined": false,
+          "same_language": true,
+          "unsupported": []
+        },
+        "fact_recall": null,
+        "answerable": true,
+        "lang": "en"
+      },
+      {
+        "question": "How does Wasalt handle my personal data?",
+        "answer": "Wasalt collects personal information (name, email, phone number, registration details), business information (company name, address for business accounts), and device information (device model, OS, identifiers, network info, crash reports, browser type, language) to provide and improve its services, as stated in its Privacy Policy [1].",
+        "model": "nvidia/nemotron-3.5-lightning:free",
+        "finish": "stop",
+        "error": null,
+        "latency_s": 7.45,
+        "sources": [
+          {
+            "title": "",
+            "url": "https://wasalt.sa/en/s/privacy-policy",
+            "site": "wasalt",
+            "kind": "page",
+            "snapshot_date": "2026-11-01",
+            "n": 1
+          },
+          {
+            "title": "properties-for-sale-in-dammam",
+            "url": "https://wasalt.sa/en/properties-for-sale-in-dammam",
+            "site": "wasalt",
+            "kind": "page",
+            "snapshot_date": "2026-11-01",
+            "n": 2
+          },
+          {
+            "title": "",
+            "url": "https://wasalt.sa/en/corporate",
+            "site": "wasalt",
+            "kind": "page",
+            "snapshot_date": "2026-10-31",
+            "n": 3
+          },
+          {
+            "title": "",
+            "url": "https://wasalt.sa/en",
+            "site": "wasalt",
+            "kind": "page",
+            "snapshot_date": "2026-11-01",
+            "n": 4
+          },
+          {
+            "title": "Terms and Conditions - DarGlobal",
+            "url": "https://darglobal.co.uk/terms-conditions",
+            "site": "darglobal",
+            "kind": "page",
+            "snapshot_date": "2026-10-31",
+            "n": 5
+          },
+          {
+            "title": "",
+            "url": "https://wasalt.sa/en/s/terms-of-use",
+            "site": "wasalt",
+            "kind": "page",
+            "snapshot_date": "2026-11-01",
+            "n": 6
+          }
+        ],
+        "grade": {
+          "claims": 5,
+          "supported": 5,
+          "citations_ok": true,
+          "declined": false,
+          "same_language": true,
+          "unsupported": []
+        },
+        "fact_recall": null,
+        "answerable": true,
+        "lang": "en"
+      },
+      {
+        "question": "Show me villas for sale in Dammam",
+        "answer": "Here are villas for sale in Dammam (as of the 2026-11-01 snapshot):\n\n- [1] Villa in Al Shooalah, Dammam: 8 bedrooms, asking price SAR 1550000  \n- [2] Villa in Al Amanah, Dammam: 7 bedrooms, asking price SAR 1100000  \n- [3] Villa in Al Shooalah, Dammam: 4 bedrooms, asking price SAR 3400000  \n- [4] Villa in King Fahad Dist, Dammam: 5 bedrooms, asking price SAR 720000",
+        "model": "nvidia/nemotron-3.5-lightning:free",
+        "finish": "stop",
+        "error": null,
+        "latency_s": 10.97,
+        "sources": [
+          {
+            "title": "Villa for sale in Al Shooalah, Dammam",
+            "url": "https://wasalt.sa/en/property/sale/villa-28295-sqm-facing-south-on-40m-width-street-5966498",
+            "site": "wasalt",
+            "kind": "listing",
+            "snapshot_date": "2026-11-01",
+            "n": 1
+          },
+          {
+            "title": "Villa for sale in Al Amanah, Dammam",
+            "url": "https://wasalt.sa/en/property/sale/villa-300-sqm-facing-west-on-24m-width-street-5952551",
+            "site": "wasalt",
+            "kind": "listing",
+            "snapshot_date": "2026-11-01",
+            "n": 2
+          },
+          {
+            "title": "Villa for sale in Al Shooalah, Dammam",
+            "url": "https://wasalt.sa/en/property/sale/villa-6945-sqm-facing-east-on-40m-width-street-5966412",
+            "site": "wasalt",
+            "kind": "listing",
+            "snapshot_date": "2026-11-01",
+            "n": 3
+          },
+          {
+            "title": "Villa for sale in King Fahad Dist, Dammam",
+            "url": "https://wasalt.sa/en/property/sale/villa-2105-sqm-facing-east-on-24m-width-street-5799161",
+            "site": "wasalt",
+            "kind": "listing",
+            "snapshot_date": "2026-11-01",
+            "n": 4
+          },
+          {
+            "title": "properties-for-sale-in-dammam",
+            "url": "https://wasalt.sa/en/properties-for-sale-in-dammam",
+            "site": "wasalt",
+            "kind": "page",
+            "snapshot_date": "2026-11-01",
+            "n": 5
+          },
+          {
+            "title": "villas-for-sale-in-riyadh",
+            "url": "https://wasalt.sa/en/villas-for-sale-in-riyadh",
+            "site": "wasalt",
+            "kind": "page",
+            "snapshot_date": "2026-11-01",
+            "n": 6
+          }
+        ],
+        "grade": {
+          "claims": 4,
+          "supported": 4,
+          "citations_ok": true,
+          "declined": false,
+          "same_language": true,
+          "unsupported": []
+        },
+        "fact_recall": null,
+        "answerable": true,
+        "lang": "en"
+      },
+      {
+        "question": "3-bedroom apartment for rent in Riyadh",
+        "answer": "Here are 3‑bedroom apartments for rent in Riyadh from the snapshot (all listed on wasalt.sa as of 2026‑11‑01, with rent period unspecified):\n\n- **Hitteen**: 109.38 sqm, SAR 85,000 [1]  \n- **Al‑Qairawan**: 150 sqm, SAR 82,000 [2]  \n- **Al‑Arid**: 135.45 sqm, SAR 75,000 [3]  \n- **Al‑Yasmeen**: 131.6 sqm, SAR 85,000 [4]  \n- **Al‑Muanisiyah**: 288 sqm, SAR 42,000 [5]  \n- **King Salman**: 151.16 sqm, SAR 100,000 [6]  \n\nRent period is not stated for any listing. For the most current details, visit the official Wasalt website.",
+        "model": "nvidia/nemotron-3.5-lightning:free",
+        "finish": "stop",
+        "error": null,
+        "latency_s": 8.56,
+        "sources": [
+          {
+            "title": "Apartment for rent in Hitteen, Riyadh",
+            "url": "https://wasalt.sa/en/property/rent/apartment-10938-sqm-with-3-bedrooms-5966625",
+            "site": "wasalt",
+            "kind": "listing",
+            "snapshot_date": "2026-11-01",
+            "n": 1
+          },
+          {
+            "title": "Apartment for rent in Al-Qairawan, Riyadh",
+            "url": "https://wasalt.sa/en/property/rent/apartment-with-3-bedrooms-5828868",
+            "site": "wasalt",
+            "kind": "listing",
+            "snapshot_date": "2026-11-01",
+            "n": 2
+          },
+          {
+            "title": "Apartment for rent in Al-Arid, Riyadh",
+            "url": "https://wasalt.sa/en/property/rent/apartment-with-3-bedrooms-5797794",
+            "site": "wasalt",
+            "kind": "listing",
+            "snapshot_date": "2026-11-01",
+            "n": 3
+          },
+          {
+            "title": "Apartment for rent in Al-Yasmeen, Riyadh",
+            "url": "https://wasalt.sa/en/property/rent/apartment-1316-sqm-with-3-bedrooms-5966633",
+            "site": "wasalt",
+            "kind": "listing",
+            "snapshot_date": "2026-11-01",
+            "n": 4
+          },
+          {
+            "title": "Apartment for rent in Al-Muanisiyah, Riyadh",
+            "url": "https://wasalt.sa/en/property/rent/apartment-288-sqm-with-3-bedrooms-5966520",
+            "site": "wasalt",
+            "kind": "listing",
+            "snapshot_date": "2026-11-01",
+            "n": 5
+          },
+          {
+            "title": "Apartment for rent in King Salman, Riyadh",
+            "url": "https://wasalt.sa/en/property/rent/apartment-15116-sqm-with-3-bedrooms-5915882",
+            "site": "wasalt",
+            "kind": "listing",
+            "snapshot_date": "2026-11-01",
+            "n": 6
+          }
+        ],
+        "grade": {
+          "claims": 8,
+          "supported": 8,
+          "citations_ok": false,
+          "declined": false,
+          "same_language": true,
+          "unsupported": []
+        },
+        "fact_recall": null,
+        "answerable": true,
+        "lang": "en"
+      },
+      {
+        "question": "Is there land for sale in Riyadh?",
+        "answer": "Yes, there are land listings for sale in Riyadh. According to the snapshots: [2] Land in Al-Khear, asking price SAR 141000000; [3] Land in Al-Khear, asking price SAR 960000000; [4] Land in Al-Khear, asking price SAR 500040; [5] Land in Ishbiliyah, asking price SAR 2475000; [6] Land in Al-Khear, asking price SAR 150000000. Prices are as of the 2026-11-01 snapshot.",
+        "model": "nvidia/nemotron-3.5-lightning:free",
+        "finish": "stop",
+        "error": null,
+        "latency_s": 18.17,
+        "sources": [
+          {
+            "title": "lands-for-sale-in-riyadh",
+            "url": "https://wasalt.sa/en/lands-for-sale-in-riyadh",
+            "site": "wasalt",
+            "kind": "page",
+            "snapshot_date": "2026-11-01",
+            "n": 1
+          },
+          {
+            "title": "Land for sale in Al-Khear, Riyadh",
+            "url": "https://wasalt.sa/en/property/sale/land-3525-sqm-facing-north-on-15m-width-street-5966102",
+            "site": "wasalt",
+            "kind": "listing",
+            "snapshot_date": "2026-11-01",
+            "n": 2
+          },
+          {
+            "title": "Land for sale in Al-Khear, Riyadh",
+            "url": "https://wasalt.sa/en/property/sale/land-800-sqm-facing-south-on-15m-width-street-5965893",
+            "site": "wasalt",
+            "kind": "listing",
+            "snapshot_date": "2026-11-01",
+            "n": 3
+          },
+          {
+            "title": "Land for sale in Al-Khear, Riyadh",
+            "url": "https://wasalt.sa/en/property/sale/land-360-sqm-facing-south-on-15m-width-street-5966506",
+            "site": "wasalt",
+            "kind": "listing",
+            "snapshot_date": "2026-11-01",
+            "n": 4
+          },
+          {
+            "title": "Land for sale in Ishbiliyah, Riyadh",
+            "url": "https://wasalt.sa/en/property/sale/land-450-sqm-facing-north-on-20m-width-street-5966343",
+            "site": "wasalt",
+            "kind": "listing",
+            "snapshot_date": "2026-11-01",
+            "n": 5
+          },
+          {
+            "title": "Land for sale in Al-Khear, Riyadh",
+            "url": "https://wasalt.sa/en/property/sale/land-375-sqm-facing-south-on-20m-width-street-5965895",
+            "site": "wasalt",
+            "kind": "listing",
+            "snapshot_date": "2026-11-01",
+            "n": 6
+          }
+        ],
+        "grade": {
+          "claims": 7,
+          "supported": 7,
+          "citations_ok": false,
+          "declined": false,
+          "same_language": true,
+          "unsupported": []
+        },
+        "fact_recall": null,
+        "answerable": true,
+        "lang": "en"
+      },
+      {
+        "question": "Apartments for sale in Makkah under 1 million SAR",
+        "answer": "Here are apartments for sale in Makkah under 1 million SAR from the snapshot (prices as of 2026-11-01):\n\n- [1] Alkhadraa: 5 bedrooms, 160.1 sqm, SAR 600,000  \n- [2] Alkhaldia: 5 bedrooms, 213 sqm, SAR 900,000  \n- [3] Alokayshia: 161 sqm, SAR 750,000  \n- [4] Alkhadraa: 5 bedrooms, 160.11 sqm, SAR 600,000  \n- [5] Alkaakia: 137 sqm, SAR 580,000  \n- [6] Almouhamdeah: 138 sqm, SAR 790,000  \n\nFor more details or to view listings, visit the official Wasalt website.",
+        "model": "nvidia/nemotron-3.5-lightning:free",
+        "finish": "stop",
+        "error": null,
+        "latency_s": 11.33,
+        "sources": [
+          {
+            "title": "Apartment for sale in Alkhadraa, Makkah",
+            "url": "https://wasalt.sa/en/property/sale/apartment-1601-sqm-with-5-bedrooms-5966129",
+            "site": "wasalt",
+            "kind": "listing",
+            "snapshot_date": "2026-11-01",
+            "n": 1
+          },
+          {
+            "title": "Apartment for sale in Alkhaldia, Makkah",
+            "url": "https://wasalt.sa/en/property/sale/apartment-with-5-bedrooms-5799172",
+            "site": "wasalt",
+            "kind": "listing",
+            "snapshot_date": "2026-11-01",
+            "n": 2
+          },
+          {
+            "title": "Apartment for sale in Alokayshia, Makkah",
+            "url": "https://wasalt.sa/en/property/sale/apartment-5910125",
+            "site": "wasalt",
+            "kind": "listing",
+            "snapshot_date": "2026-11-01",
+            "n": 3
+          },
+          {
+            "title": "Apartment for sale in Alkhadraa, Makkah",
+            "url": "https://wasalt.sa/en/property/sale/apartment-16011-sqm-with-5-bedrooms-5966127",
+            "site": "wasalt",
+            "kind": "listing",
+            "snapshot_date": "2026-11-01",
+            "n": 4
+          },
+          {
+            "title": "Apartment for sale in Alkaakia, Makkah",
+            "url": "https://wasalt.sa/en/property/sale/apartment-5947057",
+            "site": "wasalt",
+            "kind": "listing",
+            "snapshot_date": "2026-11-01",
+            "n": 5
+          },
+          {
+            "title": "Apartment for sale in Almouhamdeah, Makkah",
+            "url": "https://wasalt.sa/en/property/sale/apartment-5958277",
+            "site": "wasalt",
+            "kind": "listing",
+            "snapshot_date": "2026-11-01",
+            "n": 6
+          }
+        ],
+        "grade": {
+          "claims": 6,
+          "supported": 6,
+          "citations_ok": true,
+          "declined": false,
+          "same_language": true,
+          "unsupported": []
+        },
+        "fact_recall": null,
+        "answerable": true,
+        "lang": "en"
+      },
+      {
+        "question": "Villas for rent in Jeddah",
+        "answer": "Here are villas for rent in Jeddah from the snapshot:\n\n- 8 bedrooms, Al Yaqoot, SAR 75000 (period unspecified) [1]  \n- 6 bedrooms, Al Yaqoot, SAR 65000 (period unspecified) [2]  \n- 4 bedrooms, Al Yaqoot, SAR 60000 (period unspecified) [3]  \n- 5 bedrooms, Al Yaqoot, SAR 89000 (period unspecified) [4]  \n- 7 bedrooms, Al Hamadhnyah, SAR 60000 (period unspecified) [5]  \n- 5 bedrooms, Al Marwah, SAR 52000 (period unspecified) [6]  \n\nAll rents are as of the 2026‑11‑01 snapshot, and the rental period is not stated for any listing.",
+        "model": "nvidia/nemotron-3.5-lightning:free",
+        "finish": "stop",
+        "error": null,
+        "latency_s": 23.19,
+        "sources": [
+          {
+            "title": "Villa for rent in Al Yaqoot, Jeddah",
+            "url": "https://wasalt.sa/en/property/rent/villa-2625-sqm-facing-east-with-8-bedrooms-5966463",
+            "site": "wasalt",
+            "kind": "listing",
+            "snapshot_date": "2026-11-01",
+            "n": 1
+          },
+          {
+            "title": "Villa for rent in Al Yaqoot, Jeddah",
+            "url": "https://wasalt.sa/en/property/rent/villa-250-sqm-facing-south-with-6-bedrooms-5965230",
+            "site": "wasalt",
+            "kind": "listing",
+            "snapshot_date": "2026-11-01",
+            "n": 2
+          },
+          {
+            "title": "Villa for rent in Al Yaqoot, Jeddah",
+            "url": "https://wasalt.sa/en/property/rent/villa-275-sqm-with-4-bedrooms-5934626",
+            "site": "wasalt",
+            "kind": "listing",
+            "snapshot_date": "2026-11-01",
+            "n": 3
+          },
+          {
+            "title": "Villa for rent in Al Yaqoot, Jeddah",
+            "url": "https://wasalt.sa/en/property/rent/villa-31607-sqm-facing-south-with-5-bedrooms-5962574",
+            "site": "wasalt",
+            "kind": "listing",
+            "snapshot_date": "2026-11-01",
+            "n": 4
+          },
+          {
+            "title": "Villa for rent in Al Hamadhnyah, Jeddah",
+            "url": "https://wasalt.sa/en/property/rent/villa-300-sqm-facing-north-with-7-bedrooms-5963574",
+            "site": "wasalt",
+            "kind": "listing",
+            "snapshot_date": "2026-11-01",
+            "n": 5
+          },
+          {
+            "title": "Villa for rent in Al Marwah, Jeddah",
+            "url": "https://wasalt.sa/en/property/rent/villa-1668-sqm-facing-north-with-5-bedrooms-5960724",
+            "site": "wasalt",
+            "kind": "listing",
+            "snapshot_date": "2026-11-01",
+            "n": 6
+          }
+        ],
+        "grade": {
+          "claims": 7,
+          "supported": 7,
+          "citations_ok": false,
+          "declined": false,
+          "same_language": true,
+          "unsupported": []
+        },
+        "fact_recall": null,
+        "answerable": true,
+        "lang": "en"
+      },
+      {
+        "question": "شقق للبيع في جدة",
+        "answer": "",
+        "model": null,
+        "finish": null,
+        "error": "None: timeout: TimeoutError()",
+        "latency_s": 50.0,
+        "sources": [
+          {
+            "title": "Apartment for sale in Al Rawdhah, Jeddah",
+            "url": "https://wasalt.sa/en/property/sale/apartment-5966654",
+            "site": "wasalt",
+            "kind": "listing",
+            "snapshot_date": "2026-11-01",
+            "n": 1
+          },
+          {
+            "title": "Apartment for sale in Al Rawdhah, Jeddah",
+            "url": "https://wasalt.sa/en/property/sale/apartment-5959401",
+            "site": "wasalt",
+            "kind": "listing",
+            "snapshot_date": "2026-11-01",
+            "n": 2
+          },
+          {
+            "title": "Apartment for sale in Al Nahdah, Jeddah",
+            "url": "https://wasalt.sa/en/property/sale/apartment-with-2-bedrooms-5916424",
+            "site": "wasalt",
+            "kind": "listing",
+            "snapshot_date": "2026-11-01",
+            "n": 3
+          },
+          {
+            "title": "Apartment for sale in Al Rabbwah, Jeddah",
+            "url": "https://wasalt.sa/en/property/sale/apartment-with-3-bedrooms-5966697",
+            "site": "wasalt",
+            "kind": "listing",
+            "snapshot_date": "2026-11-01",
+            "n": 4
+          },
+          {
+            "title": "Apartment for sale in Al Rabbwah, Jeddah",
+            "url": "https://wasalt.sa/en/property/sale/apartment-with-5-bedrooms-5966696",
+            "site": "wasalt",
+            "kind": "listing",
+            "snapshot_date": "2026-11-01",
+            "n": 5
+          },
+          {
+            "title": "Apartment for sale in Al Nuzha, Jeddah",
+            "url": "https://wasalt.sa/en/property/sale/apartment-with-2-bedrooms-5966694",
+            "site": "wasalt",
+            "kind": "listing",
+            "snapshot_date": "2026-11-01",
+            "n": 6
+          }
+        ],
+        "grade": null,
+        "answerable": true,
+        "lang": "ar"
+      },
+      {
+        "question": "فلل للإيجار في جدة",
+        "answer": "وفقاً لبيانات موقع Wasalt المؤرخة في 2026-11-01، تتوفر فلل للإيجار في جدة كما يلي:\n\n- في حي الياقوت: فيلا 5 غرف نوم بـ 89,000 ريال، وفيلا 4 غرف بـ 60,000 ريال، وفيلا 6 غرف بـ 65,000 ريال. فترة الإيجار غير محددة.\n- في حي طيبة: فيلا 10 غرف نوم بـ 95,000 ريال. فترة الإيجار غير محددة.\n- في حي الفصيلية: فيلا 8 غرف نوم بـ 70,000 ريال. فترة الإيجار غير محددة.\n- في حي الشرى: فيلا 3 غرف نوم بـ 78,000 ريال. فترة الإيجار غير محددة.\n\nتُظهر هذه القائمة 6 إعلانات لفيلات مفروشة للإيجار في مناطق مختلفة من جدة، والأسعار كما وردت في snapshot الموقع. للمزيد من التفاصيل أو الحجز، يُرجى زيارة الموقع الرسمي Wasalt. [1][2][3][4][5][6]",
+        "model": "nvidia/nemotron-3.5-lightning:free",
+        "finish": "stop",
+        "error": null,
+        "latency_s": 14.23,
+        "sources": [
+          {
+            "title": "Villa for rent in Al Yaqoot, Jeddah",
+            "url": "https://wasalt.sa/en/property/rent/villa-31607-sqm-facing-south-with-5-bedrooms-5962574",
+            "site": "wasalt",
+            "kind": "listing",
+            "snapshot_date": "2026-11-01",
+            "n": 1
+          },
+          {
+            "title": "Villa for rent in Al Yaqoot, Jeddah",
+            "url": "https://wasalt.sa/en/property/rent/villa-275-sqm-with-4-bedrooms-5934626",
+            "site": "wasalt",
+            "kind": "listing",
+            "snapshot_date": "2026-11-01",
+            "n": 2
+          },
+          {
+            "title": "Villa for rent in Al Yaqoot, Jeddah",
+            "url": "https://wasalt.sa/en/property/rent/villa-250-sqm-facing-south-with-6-bedrooms-5965230",
+            "site": "wasalt",
+            "kind": "listing",
+            "snapshot_date": "2026-11-01",
+            "n": 3
+          },
+          {
+            "title": "Villa for rent in Teebah, Jeddah",
+            "url": "https://wasalt.sa/en/property/rent/villa-3125-sqm-facing-west-with-10-bedrooms-5966355",
+            "site": "wasalt",
+            "kind": "listing",
+            "snapshot_date": "2026-11-01",
+            "n": 4
+          },
+          {
+            "title": "Villa for rent in Al Faysaleyyah, Jeddah",
+            "url": "https://wasalt.sa/en/property/rent/villa-500-sqm-facing-west-with-8-bedrooms-5966691",
+            "site": "wasalt",
+            "kind": "listing",
+            "snapshot_date": "2026-11-01",
+            "n": 5
+          },
+          {
+            "title": "Villa for rent in Al Sheraa, Jeddah",
+            "url": "https://wasalt.sa/en/property/rent/villa-240-sqm-facing-north-with-3-bedrooms-5963688",
+            "site": "wasalt",
+            "kind": "listing",
+            "snapshot_date": "2026-11-01",
+            "n": 6
+          }
+        ],
+        "grade": {
+          "claims": 7,
+          "supported": 6,
+          "citations_ok": false,
+          "declined": false,
+          "same_language": true,
+          "unsupported": [
+            "6 إعلانات لفيلات مفروشة للإيجار"
+          ]
+        },
+        "fact_recall": null,
+        "answerable": true,
+        "lang": "ar"
+      },
+      {
+        "question": "ما هي منصة وصلت؟",
+        "answer": "منصة \"وصلت\" (Wasalt) هي منصة عقارية سعودية مدعومة بالذكاء الاصطناعي، تقدم خدمات البحث عن عقارات ومشروعات ومخططات رئيسية وحملات拍卖 عبر الإنترنت، وتوفر تطبيقاً للبحث عن المنازل وتطبيقاً خاصاً بالوكلاء لإدارة القوائم. تم إطلاقها في يناير 2022 ووصلت إلى 250 ألف مستخدم مسجل حتى مارس 2024، وتحمل تراخيص من Infath وREGA. كما تتعاون مع دار جلوبال لعرض مشاريع مثل برج ترامب في جدة. [1][5]\n\nللمزيد من التفاصيل، يرجى زيارة الموقع الرسمي: wasalt.sa",
+        "model": "nvidia/nemotron-3.5-lightning:free",
+        "finish": "stop",
+        "error": null,
+        "latency_s": 14.15,
+        "sources": [
+          {
+            "title": "",
+            "url": "https://wasalt.sa/en/corporate",
+            "site": "wasalt",
+            "kind": "page",
+            "snapshot_date": "2026-10-31",
+            "n": 1
+          },
+          {
+            "title": "",
+            "url": "https://wasalt.sa/en/s/privacy-policy",
+            "site": "wasalt",
+            "kind": "page",
+            "snapshot_date": "2026-11-01",
+            "n": 2
+          },
+          {
+            "title": "DarGlobal Blog | Insights on Luxury Real Estate, Investments",
+            "url": "https://darglobal.co.uk/blog",
+            "site": "darglobal",
+            "kind": "page",
+            "snapshot_date": "2026-10-31",
+            "n": 3
+          },
+          {
+            "title": "Missoni and DarGlobal Launch Project in Southern Spain",
+            "url": "https://darglobal.co.uk/press/missoni-and-dar-global-launch-residential-development-project-in-southern-spain",
+            "site": "darglobal",
+            "kind": "page",
+            "snapshot_date": "2026-10-31",
+            "n": 4
+          },
+          {
+            "title": "DarGlobal Partners with Wasalt to Advertise Trump Tower Jeddah in the Kingdom",
+            "url": "https://darglobal.co.uk/press/darglobal-partners-with-wasalt-to-advertise-trump-tower-jeddah",
+            "site": "darglobal",
+            "kind": "page",
+            "snapshot_date": "2026-10-31",
+            "n": 5
+          },
+          {
+            "title": "Missoni and DarGlobal Launch Project in Southern Spain",
+            "url": "https://darglobal.co.uk/press/missoni-and-dar-global-launch-residential-development-project-in-southern-spain-duplicate-27740",
+            "site": "darglobal",
+            "kind": "page",
+            "snapshot_date": "2026-10-31",
+            "n": 6
+          }
+        ],
+        "grade": {
+          "claims": 7,
+          "supported": 7,
+          "citations_ok": true,
+          "declined": false,
+          "same_language": true,
+          "unsupported": []
+        },
+        "fact_recall": null,
+        "answerable": true,
+        "lang": "ar"
+      },
+      {
+        "question": "أخبرني عن برج ترامب في جدة",
+        "answer": "برج ترامب في جدة (Trump Tower Jeddah) ناطقة سكنية فاخرة على كورنيش جدة، تم تطويرها من قبل دار جلوبال بالتعاون مع منظمة ترامب. يتكون من 47 طابقاً ويُقدر بقيمة 2 مليار ريال سعودي (531 مليون دولار) [2][4][5]. ويضم نادي ترامب (Trump Club)، النادي الحصري الأول في المملكة الذي يقدم مطاعم، صالة سيجار، صالة ألعاب رياضية، حمامات سباحة، جاكوزي وخدمة كونسيرج 24 ساعة [1][2][4]. تم إطلاق المشروع في ديسمبر 2024، ويوفر إطلالات على البحر الأحمر [1][4][5].",
+        "model": "nvidia/nemotron-3.5-lightning:free",
+        "finish": "stop",
+        "error": null,
+        "latency_s": 21.64,
+        "sources": [
+          {
+            "title": "Trump Tower Jeddah | Seafront Residences by DarGlobal",
+            "url": "https://darglobal.co.uk/trump-tower-jeddah",
+            "site": "darglobal",
+            "kind": "page",
+            "snapshot_date": "2026-10-31",
+            "n": 1
+          },
+          {
+            "title": "DarGlobal Awards ACC Main Works Contract for Trump Tower Jeddah as Enabling & Foundation Works Conclude",
+            "url": "https://darglobal.co.uk/press/darglobal-appoints-acc-for-main-works-as-trump-tower-jeddah-rises",
+            "site": "darglobal",
+            "kind": "page",
+            "snapshot_date": "2026-10-31",
+            "n": 2
+          },
+          {
+            "title": "DarGlobal Partners with Wasalt to Advertise Trump Tower Jeddah in the Kingdom",
+            "url": "https://darglobal.co.uk/press/darglobal-partners-with-wasalt-to-advertise-trump-tower-jeddah",
+            "site": "darglobal",
+            "kind": "page",
+            "snapshot_date": "2026-10-31",
+            "n": 3
+          },
+          {
+            "title": "DAR GLOBAL BREAKS GROUND ON TRUMP TOWER JEDDAH, APPOINTS SIFCO FOR ENABLING WORKS",
+            "url": "https://darglobal.co.uk/press/darglobal-breaks-ground-on-trump-tower-jeddah",
+            "site": "darglobal",
+            "kind": "page",
+            "snapshot_date": "2026-10-31",
+            "n": 4
+          },
+          {
+            "title": "Dar Global and The Trump Organization Expand Collaboration with the Launch of SAR 2 Billion Trump Tower to Transform Jeddah's Skyline",
+            "url": "https://darglobal.co.uk/press/Dar-Global-and-The-Trump-Organization-Expand-Collaboration-with-the-Launch-of-SAR-2-Billion-Trump-Tower-to-Tranform-Jeddah-Skyline",
+            "site": "darglobal",
+            "kind": "page",
+            "snapshot_date": "2026-10-31",
+            "n": 5
+          },
+          {
+            "title": "Trump Plaza Jeddah: Dar Global & Trump Organization Launch $1B Mixed-Use Project",
+            "url": "https://darglobal.co.uk/press/darglobal-launches-trump-plaza-jeddah-second-collaboration",
+            "site": "darglobal",
+            "kind": "page",
+            "snapshot_date": "2026-10-31",
+            "n": 6
+          }
+        ],
+        "grade": {
+          "claims": 8,
+          "supported": 8,
+          "citations_ok": true,
+          "declined": false,
+          "same_language": true,
+          "unsupported": []
+        },
+        "fact_recall": null,
+        "answerable": true,
+        "lang": "ar"
+      },
+      {
+        "question": "ما هي مشاريع دار جلوبال في عمان؟",
+        "answer": "مشاريع دار جلوبال في عمان حسب البيانات المتاحة:\n\n- **Azure Oceanfront Villas** بتصاميم Fendi Casa داخل مجتمع AIDA cliffs في Muscat، وتتكون من 19 فيلا [1]\n- **Trump International Oman** في نفس المجتمع AIDA، ويضم غرفاً وفلل فندقية وملاعب جولف [4]\n- **تطوير AIDA الرئيسي** الذي يشمل نادي جولف ترامب، فندق ووحدات سكنية [6]\n\nتُعَد هذه المشاريع جزءاً من المجتمع العقاري AIDA على ساحل عمان، وفقاً لبيانات النشرات الصحفية المؤرخة في 31 أكتوبر 2026. للحصول على تفاصيل دقيقة أو أحدث المستجدات، يُرجى زيارة الموقع الرسمي للشركة.",
+        "model": "nvidia/nemotron-3.5-lightning:free",
+        "finish": "stop",
+        "error": null,
+        "latency_s": 7.8,
+        "sources": [
+          {
+            "title": "Dar Global & Fendi Casa Announce Azure Oceanfront Villas in Oman",
+            "url": "https://darglobal.co.uk/press/darglobal-fendi-casa-announce-azure-oceanfront-villas-oman",
+            "site": "darglobal",
+            "kind": "page",
+            "snapshot_date": "2026-10-31",
+            "n": 1
+          },
+          {
+            "title": "https://darglobal.co.uk/press/dar-al-arkan-global-launches-sales-of-the-most-premium-residential-address-in-qatar-les-vagues-by-elie-saab-with-views-of-lusail-skyline-and-the-sea-at-qetaifan-island-north",
+            "url": "https://darglobal.co.uk/press/dar-al-arkan-global-launches-sales-of-the-most-premium-residential-address-in-qatar-les-vagues-by-elie-saab-with-views-of-lusail-skyline-and-the-sea-at-qetaifan-island-north",
+            "site": "darglobal",
+            "kind": "page",
+            "snapshot_date": "2026-10-31",
+            "n": 2
+          },
+          {
+            "title": "https://darglobal.co.uk/press/dar-al-arkan-and-qetaifan-projects-unveil-premium-sea-front-residences-with-interiors-designed-by-elie-saab-in-qetaifan-island-north-qatar",
+            "url": "https://darglobal.co.uk/press/dar-al-arkan-and-qetaifan-projects-unveil-premium-sea-front-residences-with-interiors-designed-by-elie-saab-in-qetaifan-island-north-qatar",
+            "site": "darglobal",
+            "kind": "page",
+            "snapshot_date": "2026-10-31",
+            "n": 3
+          },
+          {
+            "title": "Dar Global sets a new benchmark in luxury hospitality with the launch of the $500mln Trump International Oman in AIDA",
+            "url": "https://darglobal.co.uk/press/Dar-Global-sets-a-new-benchmark-in-luxury-hospitality-with-the-launch-of-the-500ml-Trump-International-Oman-in-AIDA",
+            "site": "darglobal",
+            "kind": "page",
+            "snapshot_date": "2026-10-31",
+            "n": 4
+          },
+          {
+            "title": "https://darglobal.co.uk/press/dar-al-arkan-and-qetaifan-projects-unveil-premium-sea-front-residences-with-interiors-designed-by-elie-saab-at-expo-2020-dubai",
+            "url": "https://darglobal.co.uk/press/dar-al-arkan-and-qetaifan-projects-unveil-premium-sea-front-residences-with-interiors-designed-by-elie-saab-at-expo-2020-dubai",
+            "site": "darglobal",
+            "kind": "page",
+            "snapshot_date": "2026-10-31",
+            "n": 5
+          },
+          {
+            "title": "DarGlobal awards the main works of W Residences in downtown Dubai for AED273,000,000 AED",
+            "url": "https://darglobal.co.uk/press/darglobal-awards-the-main-works-of-w-residences-in-downtown-dubai-for-aed273000000-aed",
+            "site": "darglobal",
+            "kind": "page",
+            "snapshot_date": "2026-10-31",
+            "n": 6
+          }
+        ],
+        "grade": {
+          "claims": 3,
+          "supported": 3,
+          "citations_ok": true,
+          "declined": false,
+          "same_language": true,
+          "unsupported": []
+        },
+        "fact_recall": null,
+        "answerable": true,
+        "lang": "ar"
+      },
+      {
+        "question": "How much does a Tesla Model 3 cost?",
+        "answer": "I can only help with questions about Dar Global and Wasalt properties. For example, I can answer about luxury villas in Khobar or Dar Global's branded residences.",
+        "model": "nvidia/nemotron-3.5-lightning:free",
+        "finish": "stop",
+        "error": null,
+        "latency_s": 4.54,
+        "sources": [
+          {
+            "title": "DarGlobal Blog | Insights on Luxury Real Estate, Investments",
+            "url": "https://darglobal.co.uk/blog",
+            "site": "darglobal",
+            "kind": "page",
+            "snapshot_date": "2026-10-31",
+            "n": 1
+          },
+          {
+            "title": "villas-for-sale-in-al-khobar",
+            "url": "https://wasalt.sa/en/villas-for-sale-in-al-khobar",
+            "site": "wasalt",
+            "kind": "page",
+            "snapshot_date": "2026-11-01",
+            "n": 2
+          },
+          {
+            "title": "Dar Global Showcases Tierra Viva at Lamborghini Lounge Porto Cervo 2025",
+            "url": "https://darglobal.co.uk/press/dar-global-lamborghini-lounge-porto-cervo-summer",
+            "site": "darglobal",
+            "kind": "page",
+            "snapshot_date": "2026-10-31",
+            "n": 3
+          },
+          {
+            "title": "Aston Martin Residences RAK | DarGlobal Branded Living",
+            "url": "https://darglobal.co.uk/partners/aston-martin",
+            "site": "darglobal",
+            "kind": "page",
+            "snapshot_date": "2026-10-31",
+            "n": 4
+          },
+          {
+            "title": "Insights | Real Estate Intelligence & News | DarGlobal",
+            "url": "https://darglobal.co.uk/insights",
+            "site": "darglobal",
+            "kind": "page",
+            "snapshot_date": "2026-10-31",
+            "n": 5
+          },
+          {
+            "title": "Lamborghini - House of Brands",
+            "url": "https://darglobal.co.uk/partners/lamborghini",
+            "site": "darglobal",
+            "kind": "page",
+            "snapshot_date": "2026-10-31",
+            "n": 6
+          }
+        ],
+        "grade": {
+          "claims": 2,
+          "supported": 0,
+          "citations_ok": false,
+          "declined": true,
+          "same_language": true,
+          "unsupported": [
+            "I can only help with questions about Dar Global and Wasalt properties.",
+            "I can answer about luxury villas in Khobar or Dar Global's branded residences."
+          ]
+        },
+        "fact_recall": null,
+        "answerable": false,
+        "lang": "en"
+      },
+      {
+        "question": "Does Dar Global have projects in Japan?",
+        "answer": "The provided documents do not state whether Dar Global has projects in Japan. The only references to Japan appear in [2] and [6] in the context of Aston Martin collaborations, which does not confirm Dar Global property projects there. For official project information, please visit darglobal.co.uk.",
+        "model": "nvidia/nemotron-3.5-lightning:free",
+        "finish": "stop",
+        "error": null,
+        "latency_s": 11.3,
+        "sources": [
+          {
+            "title": "Dar Global Achieves $19 Billion Project Milestone, Strengthens Presence in Saudi Arabia",
+            "url": "https://darglobal.co.uk/press/saudi-born-developer-dar-global-expands-project-pipeline-to-19-billion",
+            "site": "darglobal",
+            "kind": "page",
+            "snapshot_date": "2026-10-31",
+            "n": 1
+          },
+          {
+            "title": "DarGlobal Introduces The Astera: Interiors by Aston Martin",
+            "url": "https://darglobal.co.uk/press/dar-global-introduces-stunning-beach-residence-the-astera-interiors-by-aston-martin",
+            "site": "darglobal",
+            "kind": "page",
+            "snapshot_date": "2026-10-31",
+            "n": 2
+          },
+          {
+            "title": "Missoni and DarGlobal Launch Project in Southern Spain",
+            "url": "https://darglobal.co.uk/press/missoni-and-dar-global-launch-residential-development-project-in-southern-spain",
+            "site": "darglobal",
+            "kind": "page",
+            "snapshot_date": "2026-10-31",
+            "n": 3
+          },
+          {
+            "title": "DAR GLOBAL BREAKS GROUND ON TRUMP TOWER JEDDAH, APPOINTS SIFCO FOR ENABLING WORKS",
+            "url": "https://darglobal.co.uk/press/darglobal-breaks-ground-on-trump-tower-jeddah",
+            "site": "darglobal",
+            "kind": "page",
+            "snapshot_date": "2026-10-31",
+            "n": 4
+          },
+          {
+            "title": "Helping Saudi homegrown brands list in London - DarGlobal",
+            "url": "https://darglobal.co.uk/press/helping-saudi-homegrown-brands-list-in-london",
+            "site": "darglobal",
+            "kind": "page",
+            "snapshot_date": "2026-10-31",
+            "n": 5
+          },
+          {
+            "title": "DarGlobal & Aston Martin: Stunning Beachfront Residences in Ras Al Khaimah",
+            "url": "https://darglobal.co.uk/press/darglobal-announces-partnership-with-aston-martin-to-deliver-stunning-beachfront-residences-in-ras-al-khaimah-united-arab-emirates",
+            "site": "darglobal",
+            "kind": "page",
+            "snapshot_date": "2026-10-31",
+            "n": 6
+          }
+        ],
+        "grade": {
+          "claims": 3,
+          "supported": 3,
+          "citations_ok": false,
+          "declined": true,
+          "same_language": true,
+          "unsupported": []
+        },
+        "fact_recall": null,
+        "answerable": false,
+        "lang": "en"
+      },
+      {
+        "question": "Write me a Python script that sorts a list.",
+        "answer": "I can only help with questions about Dar Global, Wasalt, and their properties—would you like to know about Dar Global's London listing or Wasalt's property platform in Saudi Arabia?",
+        "model": "nvidia/nemotron-3.5-lightning:free",
+        "finish": "stop",
+        "error": null,
+        "latency_s": 3.24,
+        "sources": [
+          {
+            "title": "Helping Saudi homegrown brands list in London - DarGlobal",
+            "url": "https://darglobal.co.uk/press/helping-saudi-homegrown-brands-list-in-london",
+            "site": "darglobal",
+            "kind": "page",
+            "snapshot_date": "2026-10-31",
+            "n": 1
+          },
+          {
+            "title": "properties-for-sale-in-dammam",
+            "url": "https://wasalt.sa/en/properties-for-sale-in-dammam",
+            "site": "wasalt",
+            "kind": "page",
+            "snapshot_date": "2026-11-01",
+            "n": 2
+          },
+          {
+            "title": "",
+            "url": "https://wasalt.sa/en/corporate",
+            "site": "wasalt",
+            "kind": "page",
+            "snapshot_date": "2026-10-31",
+            "n": 3
+          },
+          {
+            "title": "Terms and Conditions - DarGlobal",
+            "url": "https://darglobal.co.uk/terms-conditions",
+            "site": "darglobal",
+            "kind": "page",
+            "snapshot_date": "2026-10-31",
+            "n": 4
+          },
+          {
+            "title": "Oman Real Estate Investment Guide | DarGlobal",
+            "url": "https://darglobal.co.uk/blog/your-beginners-guide-to-real-estate-investment-in-oman",
+            "site": "darglobal",
+            "kind": "page",
+            "snapshot_date": "2026-10-31",
+            "n": 5
+          },
+          {
+            "title": "Which London stock exchange listed developer builds in Dubai?",
+            "url": "https://darglobal.co.uk/insights/lse-listed-developer-dubai",
+            "site": "darglobal",
+            "kind": "page",
+            "snapshot_date": "2026-10-31",
+            "n": 6
+          }
+        ],
+        "grade": {
+          "claims": 1,
+          "supported": 0,
+          "citations_ok": false,
+          "declined": true,
+          "same_language": true,
+          "unsupported": [
+            "I can only help with questions about Dar Global, Wasalt, and their properties"
+          ]
+        },
+        "fact_recall": null,
+        "answerable": false,
+        "lang": "en"
+      }
+    ]
+  }
+}

@@ -21,6 +21,12 @@ MODEL = "sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2"
 POOL = 30  # candidates taken from each ranker
 RRF_K = 60
 TOP_K = 6
+# Words users type that the sites phrase differently; added to the BM25 query only.
+SYNONYMS = {
+    "contact": "get in touch office address phone",
+    "ceo": "chief executive officer",
+    "phone": "contact get in touch",
+}
 PER_DOC = 1  # one chunk per page keeps the top 6 diverse; prompt.py adds neighbours
 TOKEN = re.compile(r"\w+")
 ARABIC_MARKS = re.compile(r"[ً-ْـ]")  # diacritics and tatweel
@@ -125,7 +131,8 @@ def search(
 
     # Parsed filters add English terms, so an Arabic listing query still gets a BM25 vote.
     terms = [filters.city, filters.purpose, filters.property_type]
-    lexical = " ".join([query, *(t for t in terms if t), *english_terms(query)])
+    extra = [SYNONYMS[t] for t in dict.fromkeys(tokenize(query)) if t in SYNONYMS]
+    lexical = " ".join([query, *(t for t in terms if t), *english_terms(query), *extra])
     bm25 = np.where(allowed, index.bm25.get_scores(tokenize(lexical)), -np.inf)
     dense = np.where(allowed, index.vectors @ query_vec, -np.inf)
     bm25_top = np.argsort(-bm25)[:POOL]
