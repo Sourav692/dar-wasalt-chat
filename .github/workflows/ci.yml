@@ -1,0 +1,101 @@
+# Lint, test, secret scan and retrieval gate on every PR and push; deploy to Cloud Run when
+# all of them pass on main. GCP access is keyless (Workload Identity Federation, see
+# infra/setup-gcp.sh): CI may only read the index; only main may deploy.
+name: ci
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: ${{ github.event_name == 'pull_request' }}
+
+permissions:
+  contents: read
+
+env:
+  PROJECT: dar-wasalt-chat-22ytj
+  REGION: asia-south1
+  SERVICE: chat
+  # The index the image ships with. Rebuild with `make index` and upload, then bump this hash.
+  INDEX: gs://dar-wasalt-chat-22ytj-corpus/index/fc1e965542bd
+  WIF_PROVIDER: projects/184600184496/locations/global/workloadIdentityPools/github/providers/github
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+      - uses: astral-sh/setup-uv@v10
+      - run: uv sync --frozen
+      - run: uv run ruff check .
+      - run: uv run ruff format --check .
+      - run: uv run pytest -q
+
+  secrets:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          fetch-depth: 0 # scan the whole history, not just this commit
+      - name: gitleaks
+        run: >-
+          docker run --rm -v "$PWD:/repo" ghcr.io/gitleaks/gitleaks:v8.30.1
+          git /repo --redact --verbose --exit-code 1
+
+  retrieval:
+    # Fork PRs get no OIDC token, so they cannot read the private index.
+    if: github.event_name != 'pull_request' || github.event.pull_request.head.repo.full_name == github.repository
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      id-token: write
+    steps:
+      - uses: actions/checkout@v7
+      - uses: google-github-actions/auth@v3
+        with:
+          workload_identity_provider: ${{ env.WIF_PROVIDER }}
+          service_account: gh-ci@${{ env.PROJECT }}.iam.gserviceaccount.com
+      - uses: google-github-actions/setup-gcloud@v3
+      - run: mkdir -p index && gcloud storage cp "$INDEX/*" index/
+      - uses: astral-sh/setup-uv@v10
+      - run: uv sync --frozen
+      - run: uv run python -m evals.retrieval_eval # exits 1 below hit@5 0.85
+
+  deploy:
+    needs: [test, secrets, retrieval]
+    if: github.event_name != 'pull_request' && github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+    environment: production
+    permissions:
+      contents: read
+      id-token: write
+    env:
+      IMAGE: asia-south1-docker.pkg.dev/dar-wasalt-chat-22ytj/app/chat:${{ github.sha }}
+    steps:
+      - uses: actions/checkout@v7
+      - uses: google-github-actions/auth@v3
+        with:
+          workload_identity_provider: ${{ env.WIF_PROVIDER }}
+          service_account: gh-deploy@${{ env.PROJECT }}.iam.gserviceaccount.com
+      - uses: google-github-actions/setup-gcloud@v3
+      - run: mkdir -p index && gcloud storage cp "$INDEX/*" index/
+      - run: gcloud auth configure-docker "$REGION-docker.pkg.dev" --quiet
+      - run: docker build -t "$IMAGE" . && docker push "$IMAGE"
+      - name: Deploy
+        run: >-
+          gcloud run deploy "$SERVICE" --image "$IMAGE" --project "$PROJECT" --region "$REGION"
+          --service-account "chat-runtime@$PROJECT.iam.gserviceaccount.com"
+          --set-secrets OPENROUTER_API_KEY=openrouter-api-key:latest
+          --min-instances 0 --max-instances 2 --concurrency 40 --timeout 60
+          --memory 1Gi --cpu 1 --cpu-boost --allow-unauthenticated --quiet
+      - name: Smoke test
+        run: |
+          url=$(gcloud run services describe "$SERVICE" --project "$PROJECT" --region "$REGION" --format 'value(status.url)')
+          curl -fsS "$url/healthz"
+          curl -fsS -N --max-time 60 "$url/api/chat" -H 'content-type: application/json' \
+            -d '{"messages":[{"role":"user","content":"Where is Tierra Viva?"}]}' | tee reply.txt | tail -3
+          grep -q '^event: done' reply.txt

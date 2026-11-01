@@ -1,4 +1,4 @@
-.PHONY: install test lint run extract index eval judge redteam
+.PHONY: install test lint run extract index eval judge redteam docker-build docker-run
 
 install:
 	uv sync
@@ -29,3 +29,10 @@ judge:
 
 redteam:
 	uv run python -m evals.redteam --url http://localhost:8000
+
+# The image bakes in ./index and the embedding model. Port 8080 locally; Cloud Run sets $PORT.
+docker-build:
+	docker build -t dar-wasalt-chat:local .
+
+docker-run: docker-build
+	docker run --rm -p 8080:8000 --env-file .env dar-wasalt-chat:local
